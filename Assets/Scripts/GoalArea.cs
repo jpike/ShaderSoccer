@@ -8,11 +8,32 @@
 /// </summary>
 public class GoalArea : MonoBehaviour
 {
-    #region Private Fields
+    #region Public Constants
+    /// <summary>
+    /// The name of the left goal area game object.
+    /// </summary>
+    public const string LEFT_GOAL_OBJECT_NAME = "LeftGoalArea";
+    /// <summary>
+    /// The name of the right goal area game object.
+    /// </summary>
+    public const string RIGHT_GOAL_OBJECT_NAME = "RightGoalArea";
+    #endregion
+
+    #region Properties
     /// <summary>
     /// The number of points currently scored in the goal.
     /// </summary>
-    private int m_pointsScored = 0;
+    public int PointsScored { get; private set; }
+    #endregion
+
+    #region Initialization Methods
+    /// <summary>
+    /// Initializes the points score in the goal to 0.
+    /// </summary>
+    private void Start()
+    {
+        PointsScored = 0;
+    }
     #endregion
 
     #region Collision Methods
@@ -36,7 +57,7 @@ public class GoalArea : MonoBehaviour
         }
 
         // INCREMENT THE SCORE IN THE GOAL SINCE A BALL ENTERED IT.
-        ++m_pointsScored;
+        ++PointsScored;
 
         // RESET THE BALL SO THAT GAMEPLAY CAN CONTINUE.
         ball.Reset();
