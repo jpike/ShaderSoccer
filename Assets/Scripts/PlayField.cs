@@ -5,8 +5,7 @@
 /// is intended to encapsulate handling collisions of objects
 /// with the playing field.
 /// 
-/// It restricts field players to ensure that they
-/// don't leave the playing field.
+/// It restricts objects to ensure that they don't leave the playing field.
 /// 
 /// Public fields exist for defining the boundaries of the playing field - 
 /// it is expected that these boundaries are for objects that already have
@@ -50,6 +49,11 @@ public class PlayField : MonoBehaviour
     /// All of the fielded players within the playing field.
     /// </summary>
     private FieldPlayer[] m_fieldPlayers;
+
+    /// <summary>
+    /// The ball within the playing field.
+    /// </summary>
+    private Ball m_ball;
     #endregion
 
     #region Initialization Methods
@@ -63,6 +67,9 @@ public class PlayField : MonoBehaviour
 
 	    // FIND ALL OF THE PLAYERS IN THE PLAYING FIELD.
         m_fieldPlayers = gameObject.GetComponentsInChildren<FieldPlayer>();
+
+        // FIND THE BALL IN THE PLAYING FIELD.
+        m_ball = gameObject.GetComponentInChildren<Ball>();
 	}
 
     /// <summary>
@@ -95,11 +102,13 @@ public class PlayField : MonoBehaviour
 
     #region Update Methods
     /// <summary>
-    /// Updates the playing field, ensuring players stay confined.
+    /// Updates the playing field, ensuring objects stay confined.
     /// </summary>
     private void Update()
     {
         ConfinePlayersToField();
+
+        ConfineBallToField();
     }
 
     /// <summary>
@@ -166,6 +175,111 @@ public class PlayField : MonoBehaviour
             float newPlayerCenterY = m_boundaries.min.y + playerBounds.extents.y;
 
             playerTransform.position = new Vector3(playerTransform.position.x, newPlayerCenterY, playerTransform.position.z);
+        }
+    }
+
+    /// <summary>
+    /// Ensures that the ball remains confined within the playing field.
+    /// This method ensures that the ball gets reset if it escapes the playing field,
+    /// which can happen if it ends up moving to fast in a particular direction
+    /// (which can throw off the collision system).
+    /// </summary>
+    private void ConfineBallToField()
+    {
+        // CONFINE THE BALL TO WITHIN THE TOP BOUNDARY.
+        ConfineBallToTopBoundary(m_ball);
+
+        // CONFINE THE BALL TO WITHIN THE BOTTOM BOUNDARY.
+        ConfineBallToBottomBoundary(m_ball);
+
+        // CONFINE THE BALL TO WITHIN THE LEFT BOUNDARY.
+        ConfineBallToLeftBoundary(m_ball);
+
+        // CONFINE THE BALL TO WITHIN THE RIGHT BOUNDARY.
+        ConfineBallToRightBoundary(m_ball);
+    }
+
+    /// <summary>
+    /// Ensures that the provided ball is confined to within the top boundary
+    /// of the playing field.
+    /// </summary>
+    /// <param name="ball">The ball to confine to the top boundary.
+    /// It will be reset if it exceeds the boundary.</param>
+    private void ConfineBallToTopBoundary(Ball ball)
+    {
+        // CHECK IF THE BALL'S TOP HAS EXCEEDED THE TOP BOUNDARY.
+        // The bottom of the ball is checked against the top of the boundaries
+        // so that resetting only occurs if the ball completely leaves the field
+        // (as opposed to if just a single edge leaves the field).
+        Bounds ballBounds = ball.Bounds;
+        bool ballCollidedWithTop = ballBounds.min.y > m_boundaries.max.y;
+        if (ballCollidedWithTop)
+        {
+            // RESET THE BALL SO THAT GAMEPLAY CAN CONTINUE.
+            ball.Reset();
+        }
+    }
+
+    /// <summary>
+    /// Ensures that the provided ball is confined to within the bottom boundary
+    /// of the playing field.
+    /// </summary>
+    /// <param name="ball">The ball to confine to the bottom boundary.
+    /// It will be reset if it exceeds the boundary.</param>
+    private void ConfineBallToBottomBoundary(Ball ball)
+    {
+        // CHECK IF THE BALL'S BOTTOM HAS EXCEEDED THE BOTTOM BOUNDARY.
+        // The top of the ball is checked against the bottom of the boundaries
+        // so that resetting only occurs if the ball completely leaves the field
+        // (as opposed to if just a single edge leaves the field).
+        Bounds ballBounds = ball.Bounds;
+        bool ballCollidedWithBottom = ballBounds.max.y < m_boundaries.min.y;
+        if (ballCollidedWithBottom)
+        {
+            // RESET THE BALL SO THAT GAMEPLAY CAN CONTINUE.
+            ball.Reset();
+        }
+    }
+
+    /// <summary>
+    /// Ensures that the provided ball is confined to within the left boundary
+    /// of the playing field.
+    /// </summary>
+    /// <param name="ball">The ball to confine to the left boundary.
+    /// It will be reset if it exceeds the boundary.</param>
+    private void ConfineBallToLeftBoundary(Ball ball)
+    {
+        // CHECK IF THE BALL'S LEFT HAS EXCEEDED THE LEFT BOUNDARY.
+        // The right of the ball is checked against the left of the boundaries
+        // so that resetting only occurs if the ball completely leaves the field
+        // (as opposed to if just a single edge leaves the field).
+        Bounds ballBounds = ball.Bounds;
+        bool ballCollidedWithLeft = ballBounds.max.x < m_boundaries.min.x;
+        if (ballCollidedWithLeft)
+        {
+            // RESET THE BALL SO THAT GAMEPLAY CAN CONTINUE.
+            ball.Reset();
+        }
+    }
+
+    /// <summary>
+    /// Ensures that the provided ball is confined to within the right boundary
+    /// of the playing field.
+    /// </summary>
+    /// <param name="ball">The ball to confine to the right boundary.
+    /// It will be reset if it exceeds the boundary.</param>
+    private void ConfineBallToRightBoundary(Ball ball)
+    {
+        // CHECK IF THE BALL'S LEFT HAS EXCEEDED THE RIGHT BOUNDARY.
+        // The left of the ball is checked against the right of the boundaries
+        // so that resetting only occurs if the ball completely leaves the field
+        // (as opposed to if just a single edge leaves the field).
+        Bounds ballBounds = ball.Bounds;
+        bool ballCollidedWithRight = ballBounds.min.x > m_boundaries.max.x;
+        if (ballCollidedWithRight)
+        {
+            // RESET THE BALL SO THAT GAMEPLAY CAN CONTINUE.
+            ball.Reset();
         }
     }
     #endregion

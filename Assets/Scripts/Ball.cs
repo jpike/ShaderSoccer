@@ -31,6 +31,59 @@ public class Ball : MonoBehaviour
     public float MaxSpeedInMetersPerSecond = 10.0f;
     #endregion
 
+    #region Public Properties
+    /// <summary>
+    /// Retrieves the world boundaries of the ball.
+    /// </summary>
+    public Bounds Bounds
+    {
+        get
+        {
+            // RETRIEVE THE BOUNDS FROM THE ATTACHED COLLIDER IF POSSIBLE.
+            bool colliderExists = (gameObject.collider != null);
+            if (colliderExists)
+            {
+                return gameObject.collider.bounds;
+            }
+            else
+            {
+                // Return default, invalid bounds since no collider was attached to this object.
+                return new Bounds();
+            }
+        }
+    }
+    #endregion
+
+    #region Public Methods
+    /// <summary>
+    /// Resets the ball to its initial position in the center of the playing
+    /// field and starts it moving at a random direction.
+    /// </summary>
+    public void Reset()
+    {
+        // POSITION THE BALL IN THE CENTER OF THE PLAYING FIELD.
+        gameObject.transform.position = Vector3.zero;
+
+        // SELECT A RANDOM DIRECTION FOR THE BALL TO MOVE IN.
+        // Since the game effectively occurs on a 2D X-Y plane,
+        // the Z coordinate does not need to be randomized.
+        const float NO_Z_DIRECTION = 0.0f;
+        // Since random values may be zero but we want to ensure that the
+        // ball does not get stuck moving completely horizontally or vertically,
+        // a minimum direction value is specified.
+        const float MIN_RANDOM_DIRECTION = 0.1f;
+        // The maximum random direction is arbitrary, but it should not be made
+        // too large.
+        const float MAX_RANDOM_DIRECTION = 1.0f;
+
+        float newXDirection = Random.Range(MIN_RANDOM_DIRECTION, MAX_RANDOM_DIRECTION);
+        float newYDirection = Random.Range(MIN_RANDOM_DIRECTION, MAX_RANDOM_DIRECTION);
+
+        // SET THE NEW DIRECTION FOR THE BALL.
+        Direction = new Vector3(newXDirection, newYDirection, NO_Z_DIRECTION);
+    }
+    #endregion
+
     #region Update Methods
     /// <summary>
     /// Moves the ball based on elapsed time.  Since the ball interacts
