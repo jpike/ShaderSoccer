@@ -1285,8 +1285,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinVerticalMoveSpeedInMetersPerSecond: .100000001
-  MaxVerticalMoveSpeedInMetersPerSecond: 5
-  MinBallToPlayerDistanceInMeters: 1
+  MaxVerticalMoveSpeedInMetersPerSecond: 6
+  MinBallToPlayerVerticalDistanceInMeters: .5
+  MaxBallToPlayerTotalDistanceInMeters: 7
 --- !u!1 &1201647912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,8 +1521,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinVerticalMoveSpeedInMetersPerSecond: .100000001
-  MaxVerticalMoveSpeedInMetersPerSecond: 5
-  MinBallToPlayerDistanceInMeters: 1
+  MaxVerticalMoveSpeedInMetersPerSecond: 6
+  MinBallToPlayerVerticalDistanceInMeters: .5
+  MaxBallToPlayerTotalDistanceInMeters: 7
 --- !u!1001 &1266559595
 Prefab:
   m_ObjectHideFlags: 0

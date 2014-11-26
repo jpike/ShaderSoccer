@@ -124,8 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f554e16461b98743aabffed8bf131b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VerticalMoveSpeedInMetersPerSecond: 5
-  MinBallToPlayerDistanceInMeters: 1
+  MinVerticalMoveSpeedInMetersPerSecond: .100000001
+  MaxVerticalMoveSpeedInMetersPerSecond: 6
+  MinBallToPlayerVerticalDistanceInMeters: .5
+  MinBallToPlayerTotalDistanceInMeters: 7
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
