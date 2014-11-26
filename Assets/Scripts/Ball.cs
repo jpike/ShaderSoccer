@@ -6,6 +6,13 @@
 /// </summary>
 public class Ball : MonoBehaviour
 {
+    #region Public Constants
+    /// <summary>
+    /// The name of the ball game object.
+    /// </summary>
+    public const string BALL_OBJECT_NAME = "Ball";
+    #endregion
+
     #region Public Fields
     /// <summary>
     /// The direction of the ball's movement.  It may be updated
