@@ -8,11 +8,6 @@ public class PlayerControlToggleButton : MonoBehaviour
 {
     #region Public Fields
     /// <summary>
-    /// The game object for the field player controlled by this button.
-    /// </summary>
-    public GameObject FieldPlayerObject;
-
-    /// <summary>
     /// Whether or not the toggle button is right-aligned on the screen.
     /// If not, the button will be left-aligned.
     /// </summary>
@@ -22,43 +17,18 @@ public class PlayerControlToggleButton : MonoBehaviour
     /// The style of the toggle button GUI.
     /// </summary>
     public GUIStyle ToggleButtonStyle;
+
+    /// <summary>
+    /// The field player controlled by this button.
+    /// </summary>
+    public FieldTeam Team;
     #endregion
 
     #region Private Fields
     /// <summary>
-    /// The field player controlled by this button.
-    /// </summary>
-    private FieldPlayer m_player = null;
-
-    /// <summary>
     /// Whether or not the attached player should be controlled by computer AI.
     /// </summary>
     private bool m_useComputerAi = false;
-    #endregion
-
-
-    #region Initialization Methods
-    /// <summary>
-    /// Finds the field player and determines the type of controller for its movement.
-    /// </summary>
-    private void Start()
-    {
-        // DETERMINE THE TYPE OF MOVEMENT CONTROLLER CURRENTLY USED FOR THE FIELD PLAYER.
-        m_player = FieldPlayerObject.GetComponent<FieldPlayer>();
-        switch (m_player.MovementControllerType)
-        {
-            case FieldPlayer.MovementControlType.HUMAN_CONTROL:
-                m_useComputerAi = false;
-                break;
-            case FieldPlayer.MovementControlType.COMPUTER_CONTROL:
-                m_useComputerAi = true;
-                break;
-            default:
-                // Leave the setting for using computer AI alone since a valid
-                // movement type couldn't be determined.
-                break;
-        }
-	}
     #endregion
 
     #region GUI Methods
@@ -101,11 +71,11 @@ public class PlayerControlToggleButton : MonoBehaviour
         // UPDATE THE ATTACHED PLAYER'S MOVEMENT SETTING.
         if (m_useComputerAi)
         {
-            m_player.MovementControllerType = FieldPlayer.MovementControlType.COMPUTER_CONTROL;
+            Team.UseComputerControl();
         }
         else
         {
-            m_player.MovementControllerType = FieldPlayer.MovementControlType.HUMAN_CONTROL;
+            Team.UseHumanControl();
         }
     }
     #endregion

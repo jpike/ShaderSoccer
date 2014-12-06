@@ -44,16 +44,24 @@ public class PlayField : MonoBehaviour
     /// The world boundaries of the playing field.
     /// </summary>
     private Bounds m_boundaries;
-    
-    /// <summary>
-    /// All of the fielded players within the playing field.
-    /// </summary>
-    private FieldPlayer[] m_fieldPlayers;
 
     /// <summary>
     /// The ball within the playing field.
     /// </summary>
     private Ball m_ball;
+    #endregion
+
+    #region Public Properties
+    /// <summary>
+    /// Accesses the boundaries of the playing field
+    /// </summary>
+    public Bounds Bounds
+    {
+        get
+        {
+            return m_boundaries;
+        }
+    }
     #endregion
 
     #region Initialization Methods
@@ -64,9 +72,6 @@ public class PlayField : MonoBehaviour
     {
         // INITIALIZE THE BOUNDARIES OF THE PLAYING FIELD.
         m_boundaries = CalculateBounds();
-
-	    // FIND ALL OF THE PLAYERS IN THE PLAYING FIELD.
-        m_fieldPlayers = gameObject.GetComponentsInChildren<FieldPlayer>();
 
         // FIND THE BALL IN THE PLAYING FIELD.
         m_ball = gameObject.GetComponentInChildren<Ball>();
@@ -102,80 +107,11 @@ public class PlayField : MonoBehaviour
 
     #region Update Methods
     /// <summary>
-    /// Updates the playing field, ensuring objects stay confined.
+    /// Updates the playing field, ensuring the ball stays confined.
     /// </summary>
     private void Update()
     {
-        ConfinePlayersToField();
-
         ConfineBallToField();
-    }
-
-    /// <summary>
-    /// Ensures that all players are confined to positions inside of the playing field.
-    /// </summary>
-    private void ConfinePlayersToField()
-    {
-        // MAKE SURE ALL PLAYERS ARE CONFINED TO THE PLAYING FIELD.
-        foreach (FieldPlayer player in m_fieldPlayers)
-        {
-            // CONFINE THE PLAYER SO THAT IT DOESN'T EXCEED THE TOP BOUNDARY.
-            ConfinePlayerToTopBoundary(player);
-
-            // CONFINE THE PLAYER SO THAT IT DOESN'T EXCEED THE BOTTOM BOUNDARY.
-            ConfinePlayerToBottomBoundary(player);
-
-            // Players can't move horizontally, so we don't need to be checked
-            // against the horizontal boundaries.
-        }
-    }
-
-    /// <summary>
-    /// Ensures that the provided player is confined to within the top boundary
-    /// of the playing field.
-    /// </summary>
-    /// <param name="player">The field player to confine to the top boundary.
-    /// It's position may be modified to ensure that it stays within the boundary.</param>
-    private void ConfinePlayerToTopBoundary(FieldPlayer player)
-    {
-        // CHECK IF THE PLAYER'S TOP HAS EXCEEDED THE TOP BOUNDARY.
-        Bounds playerBounds = player.Bounds;
-        bool playerCollidedWithTop = playerBounds.max.y > m_boundaries.max.y;
-        if (playerCollidedWithTop)
-        {
-            // RESTRICT THE PLAYER'S TRANSFORM TO THE PLAY FIELD BOUNDARIES.
-            Transform playerTransform = player.Transform;
-            
-            // Half of the vertical height of the player is subtracted from the top of the
-            // playing field so that the new position is for the center of the player.
-            float newPlayerCenterY = m_boundaries.max.y - playerBounds.extents.y;
-
-            playerTransform.position = new Vector3(playerTransform.position.x, newPlayerCenterY, playerTransform.position.z);
-        }
-    }
-
-    /// <summary>
-    /// Ensures that the provided player is confined to within the bottom boundary
-    /// of the playing field.
-    /// </summary>
-    /// <param name="player">The field player to confine to the bottom boundary.
-    /// It's position may be modified to ensure that it stays within the boundary.</param>
-    private void ConfinePlayerToBottomBoundary(FieldPlayer player)
-    {
-        // CHECK IF THE PLAYER'S BOTTOM HAS EXCEEDED THE BOTTOM BOUNDARY.
-        Bounds playerBounds = player.Bounds;
-        bool playerCollidedWithBottom = playerBounds.min.y < m_boundaries.min.y;
-        if (playerCollidedWithBottom)
-        {
-            // RESTRICT THE PLAYER'S TRANSFORM TO THE PLAY FIELD BOUNDARIES.
-            Transform playerTransform = player.Transform;
-
-            // Half of the vertical height of the player is added from the top of the
-            // playing field so that the new position is for the center of the player.
-            float newPlayerCenterY = m_boundaries.min.y + playerBounds.extents.y;
-
-            playerTransform.position = new Vector3(playerTransform.position.x, newPlayerCenterY, playerTransform.position.z);
-        }
     }
 
     /// <summary>
