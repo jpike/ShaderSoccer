@@ -78,15 +78,22 @@ public class FieldTeam : MonoBehaviour
     /// Required if human user control is used.</param>
     /// <param name="computerController">The computer controller for the team.
     /// Required if computer AI control is used.</param>
+    /// <param name="startingActivePlayerLineIndex">The starting 0-based index for the
+    /// line of players that is currently being controlled for the team.  0 represents
+    /// the leftmost line, and increasing indices go to lines further on the right.</param>
     public void Initialize(
         List<FieldPlayerLine> fieldPlayerLines,
         HumanFieldTeamController humanController,
-        ComputerFieldTeamController computerController)
+        ComputerFieldTeamController computerController,
+        int startingActivePlayerLineIndex)
     {
         // SORT THE PLAYERS BASED ON X POSITION.
         // Sorting based on X is needed to properly determine which lines are left and right.
         m_fieldPlayerLines = fieldPlayerLines;
         m_fieldPlayerLines = m_fieldPlayerLines.OrderBy(playerLine => playerLine.transform.position.x).ToList();
+
+        // Set the index for the currently active line of players.
+        m_currentPlayerLineIndex = startingActivePlayerLineIndex;
 
         // STORE THE CONTROLLERS.
         m_humanController = humanController;

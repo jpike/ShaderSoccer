@@ -82,10 +82,12 @@ public class LeftTeamFactory : MonoBehaviour
             ball);
 
         // FINISH INITIALIZING THE LEFT TEAM.
+        const int GOALIE_LINE_INDEX = 0;
         leftTeam.GetComponent<FieldTeam>().Initialize(
             fieldPlayerLines,
             leftTeam.GetComponent<HumanFieldTeamController>(),
-            leftTeam.GetComponent<ComputerFieldTeamController>());
+            leftTeam.GetComponent<ComputerFieldTeamController>(),
+            GOALIE_LINE_INDEX);
 
         // CREATE THE TOGGLE BUTTON TO CONTROL WHETHER THE TEAM IS CONTROLLED BY HUMAN INPUT OR CPU AI.
         GameObject controlToggleButton = Instantiate(ControlToggleButtonPrefab, LEFT_TEAM_CONTROL_TOGGLE_BUTTON_POSITION, Quaternion.identity) as GameObject;
