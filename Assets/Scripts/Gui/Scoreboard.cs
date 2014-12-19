@@ -23,6 +23,34 @@ public class Scoreboard : MonoBehaviour
     private GoalArea RightTeamGoal = null;
     #endregion
 
+    #region Properties
+    /// <summary>
+    /// Retrieves the left team's score.
+    /// </summary>
+    public int LeftTeamScore
+    {
+        get
+        {
+            // The left team's score is defined by the number of points
+            // scored in the right team's goal.
+            return RightTeamGoal.PointsScored;
+        }
+    }
+
+    /// <summary>
+    /// Retrieves the right team's score.
+    /// </summary>
+    public int RightTeamScore
+    {
+        get
+        {
+            // The right team's score is defined by the number of points
+            // scored in the left team's goal.
+            return LeftTeamGoal.PointsScored;
+        }
+    }
+    #endregion
+
     #region Initialization Methods
     /// <summary>
     /// Initializes the scoreboard to have access to the goals of each team.

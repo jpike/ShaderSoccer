@@ -32,6 +32,19 @@ public class Clock : MonoBehaviour
     private float m_currentTimeInSeconds = 0.0f;
     #endregion
 
+    #region Properties
+    /// <summary>
+    /// Read-only access to the clock's current time in seconds.
+    /// </summary>
+    public float CurrentTimeInSeconds
+    {
+        get
+        {
+            return m_currentTimeInSeconds;
+        }
+    }
+    #endregion
+
     #region Initialization Methods
     /// <summary>
     /// Initializes the clock with its starting time.

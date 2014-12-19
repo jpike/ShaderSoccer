@@ -39,8 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e63ae933979c3c48982460041754b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountDown: 0
-  StartTimeInSeconds: 0
+  CountDown: 1
+  StartTimeInSeconds: 180
   ClockStyle:
     m_Name: ClockStyle
     m_Normal:

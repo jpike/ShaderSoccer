@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/GameSetupScene.unity
   - enabled: 1
     path: Assets/Scenes/GameplayScene.unity
+  - enabled: 1
+    path: Assets/Scenes/WinnerScreenScene.unity
