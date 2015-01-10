@@ -89,6 +89,13 @@ public class LeftTeamFactory : MonoBehaviour
             leftTeam.GetComponent<ComputerFieldTeamController>(),
             GOALIE_LINE_INDEX);
 
+        // TEST CHANGING COLORS.
+        Renderer[] childRenderers = leftTeam.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in childRenderers)
+        {
+            renderer.material.color = Color.blue;
+        }
+
         // CREATE THE TOGGLE BUTTON TO CONTROL WHETHER THE TEAM IS CONTROLLED BY HUMAN INPUT OR CPU AI.
         GameObject controlToggleButton = Instantiate(ControlToggleButtonPrefab, LEFT_TEAM_CONTROL_TOGGLE_BUTTON_POSITION, Quaternion.identity) as GameObject;
         controlToggleButton.GetComponent<PlayerControlToggleButton>().Team = leftTeam.GetComponent<FieldTeam>();

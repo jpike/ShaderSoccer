@@ -28,6 +28,16 @@ public class RightTeamFactory : MonoBehaviour
     public GameObject ControlToggleButtonPrefab = null;
 
     /// <summary>
+    /// @todo   Document.
+    /// </summary>
+    public Material TeamMaterial = null;
+
+    /// <summary>
+    /// @todo   Document.
+    /// </summary>
+    public Color TeamColor;
+
+    /// <summary>
     /// The world position of the goalie line for the team.
     /// </summary>
     private readonly Vector3 RIGHT_TEAM_GOALIE_LINE_POSITION = new Vector3(6.0f, 0.0f, 0.0f);
@@ -86,6 +96,14 @@ public class RightTeamFactory : MonoBehaviour
             rightTeam.GetComponent<HumanFieldTeamController>(),
             rightTeam.GetComponent<ComputerFieldTeamController>(),
             goalieLineIndex);
+
+        // TEST CHANGING COLORS.
+        TeamMaterial.SetColor("_DiffuseColor", Color.red);
+        Renderer[] childRenderers = rightTeam.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in childRenderers)
+        {
+            renderer.material = TeamMaterial;
+        }
 
         // CREATE THE TOGGLE BUTTON TO CONTROL WHETHER THE TEAM IS CONTROLLED BY HUMAN INPUT OR CPU AI.
         GameObject controlToggleButton = Instantiate(ControlToggleButtonPrefab, RIGHT_TEAM_CONTROL_TOGGLE_BUTTON_POSITION, Quaternion.identity) as GameObject;
