@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
@@ -34,6 +35,18 @@ public class ColorComponentSelector : MonoBehaviour
     /// </summary>
     public string LabelTextPrefix = null;
 
+    /// <summary>
+    /// Retrieves the vaue of the color component
+    /// controlled by this slider.
+    /// </summary>
+    public float ComponentValue
+    {
+        get
+        {
+            return ComponentSlider.value;
+        }
+    }
+
 	/// <summary>
 	/// Fills the attached slider with the configured color.
 	/// </summary>
@@ -53,5 +66,16 @@ public class ColorComponentSelector : MonoBehaviour
     {
         // Display the color value in the label with up to 2 decimal places.
         Label.text = LabelTextPrefix + ComponentSlider.value.ToString("0.00");
+    }
+
+    /// <summary>
+    /// Adds a change listener to this selector for when its component
+    /// value changes.
+    /// </summary>
+    /// <param name="changeListener">The listener function to call
+    /// when the color component value changes.</param>
+    public void AddOnValueChangedListener(UnityAction<float> changeListener)
+    {
+        ComponentSlider.onValueChanged.AddListener(changeListener);
     }
 }

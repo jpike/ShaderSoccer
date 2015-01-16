@@ -207,7 +207,7 @@ RectTransform:
   - {fileID: 2089023673}
   - {fileID: 234208575}
   m_Father: {fileID: 761169324}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: .699999988}
   m_AnchorMax: {x: 1, y: .899999976}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -369,6 +369,14 @@ Prefab:
     - target: {fileID: 22400066, guid: a842331e3a4c0f5478e93f552bab6085, type: 2}
       propertyPath: m_Pivot.y
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400050, guid: a842331e3a4c0f5478e93f552bab6085, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400018, guid: a842331e3a4c0f5478e93f552bab6085, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a842331e3a4c0f5478e93f552bab6085, type: 2}
@@ -1220,7 +1228,7 @@ RectTransform:
   - {fileID: 1095145761}
   - {fileID: 1020151734}
   m_Father: {fileID: 761169324}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: .5}
   m_AnchorMax: {x: 1, y: .699999988}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1348,6 +1356,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 761169324}
+  - 114: {fileID: 761169325}
   m_Layer: 5
   m_Name: ColorSelector
   m_TagString: Untagged
@@ -1366,8 +1375,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 735981117}
   - {fileID: 126374994}
+  - {fileID: 735981117}
   - {fileID: 1650555723}
   - {fileID: 1112061251}
   m_Father: {fileID: 1760760473}
@@ -1377,6 +1386,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &761169325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400048, guid: a842331e3a4c0f5478e93f552bab6085,
+    type: 2}
+  m_PrefabInternal: {fileID: 168471089}
+  m_GameObject: {fileID: 761169323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8bb06a98d691eb4c81209b589f8b8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &764317615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3309,6 +3330,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1760760473}
+  - 114: {fileID: 1760760474}
   m_Layer: 5
   m_Name: SolidColorShaderConfigGui
   m_TagString: Untagged
@@ -3335,6 +3357,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1760760474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400050, guid: a842331e3a4c0f5478e93f552bab6085,
+    type: 2}
+  m_PrefabInternal: {fileID: 168471089}
+  m_GameObject: {fileID: 1760760472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5431824f39dce4dae66cd3e4fcad50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1820549276
 GameObject:
   m_ObjectHideFlags: 0

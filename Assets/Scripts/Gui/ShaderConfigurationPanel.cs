@@ -39,8 +39,6 @@ public class ShaderConfigurationPanel : MonoBehaviour
     /// </summary>
 	public void DisplaySolidColorShaderConfiguration()
     {
-        Debug.Log("DisplaySolidColorShaderConfiguration");
-
         // CHECK IF THE SOLID COLOR SHADER TOGGLE WAS ENABLED.
         if (!SolidColorShaderToggle.isOn)
         {
@@ -58,6 +56,11 @@ public class ShaderConfigurationPanel : MonoBehaviour
         CurrentShaderConfigGui.transform.SetParent(this.transform);
         CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+
+        // INITIALIZE THE SOLID COLOR SHADER CONFIGURATION GUI.
+        CurrentShaderConfigGui.GetComponent<SolidColorShaderConfigGui>().Initialize(
+            SolidColorShaderMaterial,
+            ExampleGameObject);
 
         // UPDATE THE EXAMPLE GAME OBJECT TO USE THE SOLID COLOR SHADER.
         ExampleGameObject.renderer.material = SolidColorShaderMaterial;
