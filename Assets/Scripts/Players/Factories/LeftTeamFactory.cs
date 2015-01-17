@@ -30,6 +30,13 @@ public class LeftTeamFactory : MonoBehaviour
     public GameObject ControlToggleButtonPrefab = null;
 
     /// <summary>
+    /// The material to use for shading the players in the team.
+    /// It is static to allow passing the material from the game setup
+    /// screen to the main gameplay screen.
+    /// </summary>
+    public static Material TeamMaterial = null;
+
+    /// <summary>
     /// The world position of the goalie line for the team.
     /// </summary>
     private readonly Vector3 LEFT_TEAM_GOALIE_LINE_POSITION = new Vector3(-6.0f, 0.0f, 0.0f);
@@ -89,11 +96,11 @@ public class LeftTeamFactory : MonoBehaviour
             leftTeam.GetComponent<ComputerFieldTeamController>(),
             GOALIE_LINE_INDEX);
 
-        // TEST CHANGING COLORS.
-        Renderer[] childRenderers = leftTeam.GetComponentsInChildren<Renderer>();
-        foreach (Renderer renderer in childRenderers)
+        // UPDATE THE MATERIAL FOR THE TEAM TO THE CONFIGURED MATERIAL.
+        Renderer[] teamPlayerRenderers = leftTeam.GetComponentsInChildren<Renderer>();
+        foreach (Renderer playerRenderer in teamPlayerRenderers)
         {
-            renderer.material.color = Color.blue;
+            playerRenderer.material = TeamMaterial;
         }
 
         // CREATE THE TOGGLE BUTTON TO CONTROL WHETHER THE TEAM IS CONTROLLED BY HUMAN INPUT OR CPU AI.

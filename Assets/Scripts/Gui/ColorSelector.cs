@@ -52,7 +52,7 @@ public class ColorSelector : MonoBehaviour
     /// knowledge about all of the child selectors
     /// for each component of an RGBA color.
     /// </summary>
-    private void Start()
+    public void Initialize()
     {
         // GET ALL OF THE CHILD COLOR COMPONENT SELECTORS.
         m_redSelector = transform.Find("RedColorSelector").GetComponent<ColorComponentSelector>();

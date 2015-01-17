@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// A GUI control for configuring the solid color shader.
+/// A GUI control for configuring the diffuse shader.
 /// This class encapsulates the underlying GUI controls
 /// needed to configure the shader, allowing it to present
 /// a simplified interface to receive the shader's configuration.
 /// </summary>
-public class SolidColorShaderConfigGui : MaterialConfiguration
+public class DiffuseShaderConfigGui : MaterialConfiguration
 {
     /// <summary>
-    /// The material for the solid color shader.
+    /// The material for the diffuse shader.
     /// </summary>
-    public Material SolidColorShaderMaterial = null;
+    public Material DiffuseShaderMaterial = null;
 
     /// <summary>
-    /// The selector for the solid color.
+    /// The selector for the diffuse color.
     /// </summary>
     private ColorSelector m_colorSelector = null;
 
@@ -26,12 +26,12 @@ public class SolidColorShaderConfigGui : MaterialConfiguration
 
     /// <summary>
     /// Initializes the configuration GUI to have
-    /// access to the selector of the solid color
+    /// access to the selector of the diffuse color
     /// for the shader and knowledge about the example
     /// game object.
     /// </summary>
     /// <param name="exampleGameObject">The example game object
-    /// to update with new solid color settings configured
+    /// to update with new diffuse color settings configured
     /// in this control.</param>
     public void Initialize(GameObject exampleGameObject)
     {
@@ -51,20 +51,20 @@ public class SolidColorShaderConfigGui : MaterialConfiguration
     /// Updates the color displayed in the example object based
     /// the provided color.
     /// </summary>
-    /// <param name="color">The new solid color for the example object.</param>
+    /// <param name="color">The new diffuse color for the example object.</param>
     public void UpdateDisplayedColor(Color color)
     {
-        // UPDATE THE SOLID COLOR IN THE MATERIAL.
-        SolidColorShaderMaterial.SetColor("_Color", color);
-        m_exampleGameObject.renderer.material = SolidColorShaderMaterial;
+        // UPDATE THE DIFFUSE COLOR IN THE MATERIAL.
+        DiffuseShaderMaterial.SetColor("_DiffuseColor", color);
+        m_exampleGameObject.renderer.material = DiffuseShaderMaterial;
     }
 
     /// <summary>
-    /// Creates a copy of the configured solid color shader material.
+    /// Creates a copy of the configured diffuse shader material.
     /// </summary>
-    /// <returns>The configured solid color shader material.</returns>
+    /// <returns>The configured diffuse shader material.</returns>
     public override Material CreateMaterial()
     {
-        return new Material(SolidColorShaderMaterial);
+        return new Material(DiffuseShaderMaterial);
     }
 }

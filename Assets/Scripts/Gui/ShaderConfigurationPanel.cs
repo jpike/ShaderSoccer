@@ -27,10 +27,26 @@ public class ShaderConfigurationPanel : MonoBehaviour
     /// The prefab for the configuration GUI for the solid color shader.
     /// </summary>
     public GameObject SolidColorShaderConfigGuiPrefab = null;
+
     /// <summary>
-    /// The material for the solid color shader.
+    /// The toggle button for the diffuse shader.
     /// </summary>
-    public Material SolidColorShaderMaterial = null;
+    public Toggle DiffuseShaderToggle = null;
+    /// <summary>
+    /// The prefab for the configuration GUI for the diffuse shader.
+    /// </summary>
+    public GameObject DiffuseShaderConfigGuiPrefab = null;
+
+    /// <summary>
+    /// Retrieves the material currently configured for the team.
+    /// </summary>
+    /// <returns>The material configured for the team.</returns>
+    public Material GetMaterial()
+    {
+        // RETRIEVE THE MATERIAL FROM THE CURRENT SHADER CONFIGURATION GUI.
+        MaterialConfiguration materialConfiguration = CurrentShaderConfigGui.GetComponent<MaterialConfiguration>();
+        return materialConfiguration.CreateMaterial();
+    }
 
     /// <summary>
     /// Displays the configuration settings for the solid
@@ -54,17 +70,43 @@ public class ShaderConfigurationPanel : MonoBehaviour
         // POPULATE THE SOLID COLOR SHADER CONFIGURATION IN THE PANEL.
         CurrentShaderConfigGui = Instantiate(SolidColorShaderConfigGuiPrefab) as GameObject;
         CurrentShaderConfigGui.transform.SetParent(this.transform);
+        /// @todo   Research and document why these need to be set.
         CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
 
         // INITIALIZE THE SOLID COLOR SHADER CONFIGURATION GUI.
         CurrentShaderConfigGui.GetComponent<SolidColorShaderConfigGui>().Initialize(
-            SolidColorShaderMaterial,
             ExampleGameObject);
-
-        // UPDATE THE EXAMPLE GAME OBJECT TO USE THE SOLID COLOR SHADER.
-        ExampleGameObject.renderer.material = SolidColorShaderMaterial;
     }
-	
-	
+
+    /// <summary>
+    /// Displays the configuration settings for the diffuse
+    /// shader in the configuration panel, if the
+    /// toggle is on.
+    /// </summary>
+    public void DisplayDiffuseShaderConfiguration()
+    {
+        // CHECK IF THE DIFFUSE COLOR SHADER TOGGLE WAS ENABLED.
+        if (!DiffuseShaderToggle.isOn)
+        {
+            // There is nothing to do.  It is the responsibility
+            // of other code in this class to clear the configuration
+            // panel of any leftover GUI components.
+            return;
+        }
+
+        // CLEAR THE SHADER CONFIGURATION PANEL.
+        Destroy(CurrentShaderConfigGui);
+
+        // POPULATE THE DIFFUSE SHADER CONFIGURATION IN THE PANEL.
+        CurrentShaderConfigGui = Instantiate(DiffuseShaderConfigGuiPrefab) as GameObject;
+        CurrentShaderConfigGui.transform.SetParent(this.transform);
+        /// @todo   Research and document why these need to be set.
+        CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+
+        // INITIALIZE THE DIFFUSE SHADER CONFIGURATION GUI.
+        CurrentShaderConfigGui.GetComponent<DiffuseShaderConfigGui>().Initialize(
+            ExampleGameObject);
+    }
 }
