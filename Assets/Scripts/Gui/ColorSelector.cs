@@ -4,7 +4,8 @@ using UnityEngine.Events;
 
 /// <summary>
 /// A GUI control that allows users to select
-/// components of an RGBA color.
+/// components of an RGB color.  Alpha is currently
+/// disabled until a need arises to make it configurable.
 /// </summary>
 public class ColorSelector : MonoBehaviour
 {
@@ -65,6 +66,12 @@ public class ColorSelector : MonoBehaviour
         m_greenSelector.AddOnValueChangedListener(OnColorChanged);
         m_blueSelector.AddOnValueChangedListener(OnColorChanged);
         m_alphaSelector.AddOnValueChangedListener(OnColorChanged);
+
+        // DISABLE THE ALPHA COMPONENT SELECTOR.
+        // At the moment, the alpha component of colors aren't used in shaders,
+        // so it is misleading to allow users to configure it.  If a need arises,
+        // it may be re-enabled.
+        m_alphaSelector.gameObject.SetActive(false);
     }
 
     /// <summary>

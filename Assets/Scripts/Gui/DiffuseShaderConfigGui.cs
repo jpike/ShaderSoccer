@@ -38,6 +38,9 @@ public class DiffuseShaderConfigGui : MaterialConfiguration
         // STORE THE EXAMPLE GAME OBJECT.
         m_exampleGameObject = exampleGameObject;
 
+        // CLONE THE ATTACHED MATERIAL SO THAT WE DON'T MODIFY THE UNDERLYING MATERIAL ASSET.
+        DiffuseShaderMaterial = new Material(DiffuseShaderMaterial);
+
         // REGISTER WITH THE COLOR SELECTOR TO BE NOTIFIED WHEN THE COLOR CHANGES.
         m_colorSelector = transform.Find("ColorSelector").GetComponent<ColorSelector>();
         m_colorSelector.Initialize();

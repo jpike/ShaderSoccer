@@ -24,7 +24,9 @@ public class GameSetupStartButton : MonoBehaviour
         TeamConfigurationPanel leftTeamConfiguration = GameObject.Find("LeftTeamConfigurationPanel").GetComponent<TeamConfigurationPanel>();
         LeftTeamFactory.TeamMaterial = leftTeamConfiguration.GetMaterial();
 
-        /// @todo INITIALIZE THE RIGHT TEAM.
+        // INITIALIZE THE RIGHT TEAM.
+        TeamConfigurationPanel rightTeamConfiguration = GameObject.Find("RightTeamConfigurationPanel").GetComponent<TeamConfigurationPanel>();
+        RightTeamFactory.TeamMaterial = rightTeamConfiguration.GetMaterial();
 
         // START THE MAIN GAMEPLAY.
         SceneLoader.LoadScene("GameplayScene");

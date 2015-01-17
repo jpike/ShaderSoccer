@@ -28,14 +28,11 @@ public class RightTeamFactory : MonoBehaviour
     public GameObject ControlToggleButtonPrefab = null;
 
     /// <summary>
-    /// @todo   Document.
+    /// The material to use for shading the players in the team.
+    /// It is static to allow passing the material from the game setup
+    /// screen to the main gameplay screen.
     /// </summary>
-    public Material TeamMaterial = null;
-
-    /// <summary>
-    /// @todo   Document.
-    /// </summary>
-    public Color TeamColor;
+    public static Material TeamMaterial = null;
 
     /// <summary>
     /// The world position of the goalie line for the team.
@@ -97,12 +94,11 @@ public class RightTeamFactory : MonoBehaviour
             rightTeam.GetComponent<ComputerFieldTeamController>(),
             goalieLineIndex);
 
-        // TEST CHANGING COLORS.
-        TeamMaterial.SetColor("_DiffuseColor", Color.red);
-        Renderer[] childRenderers = rightTeam.GetComponentsInChildren<Renderer>();
-        foreach (Renderer renderer in childRenderers)
+        // UPDATE THE MATERIAL FOR THE TEAM TO THE CONFIGURED MATERIAL.
+        Renderer[] teamPlayerRenderers = rightTeam.GetComponentsInChildren<Renderer>();
+        foreach (Renderer playerRenderer in teamPlayerRenderers)
         {
-            renderer.material = TeamMaterial;
+            playerRenderer.material = TeamMaterial;
         }
 
         // CREATE THE TOGGLE BUTTON TO CONTROL WHETHER THE TEAM IS CONTROLLED BY HUMAN INPUT OR CPU AI.
