@@ -45,6 +45,12 @@ public class FieldTeam : MonoBehaviour
     private ComputerFieldTeamController m_computerController = null;
 
     /// <summary>
+    /// The visual indicator for which line of players is currently
+    /// active in the team.
+    /// </summary>
+    private GameObject m_activePlayerLineVisualIndicator = null;
+
+    /// <summary>
     /// The minimum valid player line index.
     /// </summary>
     private int MinPlayerLineIndex
@@ -81,11 +87,14 @@ public class FieldTeam : MonoBehaviour
     /// <param name="startingActivePlayerLineIndex">The starting 0-based index for the
     /// line of players that is currently being controlled for the team.  0 represents
     /// the leftmost line, and increasing indices go to lines further on the right.</param>
+    /// <param name="activePlayerLineIndicator">The visual indicator for which line of
+    /// players in the team is currently active.</param>
     public void Initialize(
         List<FieldPlayerLine> fieldPlayerLines,
         HumanFieldTeamController humanController,
         ComputerFieldTeamController computerController,
-        int startingActivePlayerLineIndex)
+        int startingActivePlayerLineIndex,
+        GameObject activePlayerLineIndicator)
     {
         // SORT THE PLAYERS BASED ON X POSITION.
         // Sorting based on X is needed to properly determine which lines are left and right.
@@ -94,6 +103,10 @@ public class FieldTeam : MonoBehaviour
 
         // Set the index for the currently active line of players.
         m_currentPlayerLineIndex = startingActivePlayerLineIndex;
+
+        // INITIALIZE THE ACTIVE PLAYER LINE INDICATOR TO BE POSITIONED BEHIND THE CURRENTLY ACTIVE PLAYER LINE.
+        m_activePlayerLineVisualIndicator = activePlayerLineIndicator;
+        MoveVisualIndicatorBehindCurrentLine();
 
         // STORE THE CONTROLLERS.
         m_humanController = humanController;
@@ -120,6 +133,9 @@ public class FieldTeam : MonoBehaviour
         --m_currentPlayerLineIndex;
         m_currentPlayerLineIndex = Mathf.Clamp(m_currentPlayerLineIndex, MinPlayerLineIndex, MaxPlayerLineIndex);
 
+        // VISUALLY INDICATE WHICH LINE IS NOW UNDER CONTROL.
+        MoveVisualIndicatorBehindCurrentLine();
+
         // SWITCH MOVEMENT CONTROL TO APPLY TO ONLY THE CURRENT LINE OF PLAYERS.
         EnableControlOnlyOfCurrentLine();
     }
@@ -134,6 +150,9 @@ public class FieldTeam : MonoBehaviour
         // It needs to be clamped to ensure it is still valid.
         ++m_currentPlayerLineIndex;
         m_currentPlayerLineIndex = Mathf.Clamp(m_currentPlayerLineIndex, MinPlayerLineIndex, MaxPlayerLineIndex);
+
+        // VISUALLY INDICATE WHICH LINE IS NOW UNDER CONTROL.
+        MoveVisualIndicatorBehindCurrentLine();
 
         // SWITCH MOVEMENT CONTROL TO APPLY TO ONLY THE CURRENT LINE OF PLAYERS.
         EnableControlOnlyOfCurrentLine();
@@ -201,5 +220,21 @@ public class FieldTeam : MonoBehaviour
 
         // ENABLE CONTROL ONLY FOR THE CURRENT LINE.
         m_fieldPlayerLines[m_currentPlayerLineIndex].ControlEnabled = true;
+    }
+
+    /// <summary>
+    /// Moves the visual indicator behind the currently active line of players
+    /// to better inform the user which line is currently under control.
+    /// </summary>
+    private void MoveVisualIndicatorBehindCurrentLine()
+    {
+        // FIND WHERE THE CURRENT ACTIVE LINE OF PLAYERS IS LOCATED.
+        Vector3 currentFieldPlayerLinePosition = GetCurrentFieldPlayerLine().transform.position;
+
+        // POSITION THE VISUAL LINE INDICATOR HORIZONTALLY BEHIND THE CURRENTLY ACTIVE LINE.
+        m_activePlayerLineVisualIndicator.transform.position = new Vector3(
+            currentFieldPlayerLinePosition.x,
+            m_activePlayerLineVisualIndicator.transform.position.y,
+            m_activePlayerLineVisualIndicator.transform.position.z);
     }
 }

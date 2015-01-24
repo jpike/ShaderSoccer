@@ -26,6 +26,11 @@ public class RightTeamFactory : MonoBehaviour
     /// or computer AI.
     /// </summary>
     public GameObject ControlToggleButtonPrefab = null;
+    /// <summary>
+    /// The prefab for showing which line of players in the team is
+    /// currently active.
+    /// </summary>
+    public GameObject ActivePlayerLineVisualIndicatorPrefab = null;
 
     /// <summary>
     /// The material to use for shading the players in the team.
@@ -86,13 +91,18 @@ public class RightTeamFactory : MonoBehaviour
             playField,
             ball);
 
+        // CREATE THE VISUAL INDICATOR FOR WHICH LINE IS ACTIVE.
+        GameObject activePlayerLineIndicator = Instantiate(ActivePlayerLineVisualIndicatorPrefab) as GameObject;
+        activePlayerLineIndicator.renderer.material = new Material(TeamMaterial);
+
         // FINISH INITIALIZING THE RIGHT TEAM.
         int goalieLineIndex = fieldPlayerLines.Count - 1;
         rightTeam.GetComponent<FieldTeam>().Initialize(
             fieldPlayerLines,
             rightTeam.GetComponent<HumanFieldTeamController>(),
             rightTeam.GetComponent<ComputerFieldTeamController>(),
-            goalieLineIndex);
+            goalieLineIndex,
+            activePlayerLineIndicator);
 
         // UPDATE THE MATERIAL FOR THE TEAM TO THE CONFIGURED MATERIAL.
         Renderer[] teamPlayerRenderers = rightTeam.GetComponentsInChildren<Renderer>();

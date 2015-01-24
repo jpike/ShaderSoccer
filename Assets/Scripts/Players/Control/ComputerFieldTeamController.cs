@@ -35,6 +35,11 @@ public class ComputerFieldTeamController : MonoBehaviour
     private Ball m_ball;
 
     /// <summary>
+    /// The time since the last switch to a different player line.
+    /// </summary>
+    private float m_timeSinceLastSwitchInSeconds = 0.0f;
+
+    /// <summary>
     /// Initializes the controller to know about necessary game objects.
     /// This method is intended to mimic a constructor.  An explicit
     /// initialize method was chosen over implementing the standard
@@ -55,6 +60,21 @@ public class ComputerFieldTeamController : MonoBehaviour
     /// </summary>
     public void SwitchPlayerLineBasedOnAi()
     {
+        // CHECK IF THE MINIMUM TIME SINCE LAST SWITCHING TO A DIFFERENT LINE HAS BEEN REACHED.
+        // A minimum time is enforced to avoid having the CPU switch lines too quickly, which
+        // could be very distracting because it could cause the visual indicator for the currently
+        // active line to switch too quickly.  The minimum time is set based on testing to be the
+        // smallest amount of time that doesn't appear to cause too much visual jitter.
+        const float MIN_TIME_BETWEEN_LINE_SWITCHES_IN_SECONDS = 0.6f;
+        m_timeSinceLastSwitchInSeconds += Time.deltaTime;
+        bool minTimeReachedForLineSwitch = (m_timeSinceLastSwitchInSeconds >= MIN_TIME_BETWEEN_LINE_SWITCHES_IN_SECONDS);
+        if (!minTimeReachedForLineSwitch)
+        {
+            // Not enough time has passed since the last potential line switch,
+            // so return early since no switching will need to occur.
+            return;
+        }
+
         // GET THE CURRENT ACTIVE LINE OF PLAYERS FOR THE TEAM.
         FieldPlayerLine currentFieldPlayerLine = m_team.GetCurrentFieldPlayerLine();
         
@@ -72,6 +92,7 @@ public class ComputerFieldTeamController : MonoBehaviour
             if (ballLeftOfCurrentPlayerLine)
             {
                 m_team.SwitchToLeftLineOfPlayers();
+                m_timeSinceLastSwitchInSeconds = 0.0f;
             }
         }
 
@@ -86,6 +107,7 @@ public class ComputerFieldTeamController : MonoBehaviour
             if (ballRightOfCurrentPlayerLine)
             {
                 m_team.SwitchToRightLineOfPlayers();
+                m_timeSinceLastSwitchInSeconds = 0.0f;
             }
         }
     }
