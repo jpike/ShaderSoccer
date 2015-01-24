@@ -57,6 +57,23 @@ public class ColorComponentSelector : MonoBehaviour
 
         // Initialize the label with the initial prefix text and color value.
         UpdateLabelWithColorValue();
+
+        // ADJUST ADDITIONAL PROPERTIES OF THE LABEL.
+        // These would normally be modified via the inspector.  However, due to the way
+        // that prefabs are nested, modifying the original prefab for this script doesn't
+        // appear to automatically updated nested versions of this prefab inside other
+        // prefabs, so the modifications are done via code to avoid wasting time trying
+        // to re-create the appropriate prefabs.
+
+        // The font size is increased because the previous font size was too small for the web player.
+        Label.fontSize = 12;
+
+        // When the font size is adjusted, the veritical positioning of the label isn't well-aligned
+        // with the color slider, so it must be manually fixed here.
+        Label.rectTransform.position = new Vector3(
+            Label.rectTransform.position.x,
+            ComponentSlider.GetComponent<RectTransform>().position.y,//.rectTransform.position.y,
+            Label.rectTransform.position.z);
 	}
 	
     /// <summary>
