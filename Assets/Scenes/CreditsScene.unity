@@ -443,7 +443,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Jacob Pike - Project Lead/Programming
+  m_Text: 'Jacob Pike - Project Lead/Programming
+
+
+    Chris DeLeon - 3D Player Models'
 --- !u!222 &1518021040
 CanvasRenderer:
   m_ObjectHideFlags: 0

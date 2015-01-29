@@ -22,7 +22,7 @@ public class SolidColorShaderConfigGui : MaterialConfiguration
     /// The example game object that gets updated with new shader
     /// settings configured in this GUI control.
     /// </summary>
-    private GameObject m_exampleGameObject = null;
+    private PlayerExampleGameObject m_exampleGameObject = null;
 
     /// <summary>
     /// Initializes the configuration GUI to have
@@ -36,7 +36,7 @@ public class SolidColorShaderConfigGui : MaterialConfiguration
     public void Initialize(GameObject exampleGameObject)
     {
         // STORE THE EXAMPLE GAME OBJECT.
-        m_exampleGameObject = exampleGameObject;
+        m_exampleGameObject = exampleGameObject.GetComponent<PlayerExampleGameObject>();
 
         // CLONE THE ATTACHED MATERIAL SO THAT WE DON'T MODIFY THE UNDERLYING MATERIAL ASSET.
         SolidColorShaderMaterial = new Material(SolidColorShaderMaterial);
@@ -59,7 +59,7 @@ public class SolidColorShaderConfigGui : MaterialConfiguration
     {
         // UPDATE THE SOLID COLOR IN THE MATERIAL.
         SolidColorShaderMaterial.SetColor("_Color", color);
-        m_exampleGameObject.renderer.material = SolidColorShaderMaterial;
+        m_exampleGameObject.SetMaterial(SolidColorShaderMaterial);
     }
 
     /// <summary>
