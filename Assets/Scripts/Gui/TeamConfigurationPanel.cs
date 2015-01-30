@@ -8,6 +8,12 @@ using UnityEngine.UI;
 public class TeamConfigurationPanel : MonoBehaviour
 {
     /// <summary>
+    /// The example game object showcasing how players in the team
+    /// will look after configuring them in this panel.
+    /// </summary>
+    public PlayerExampleGameObject ExampleGameObject = null;
+
+    /// <summary>
     /// The child panel for configuring the shader for this team.
     /// </summary>
     private ShaderConfigurationPanel m_shaderConfigPanel = null;
@@ -20,8 +26,9 @@ public class TeamConfigurationPanel : MonoBehaviour
         // FIND THE CHILD SHADER CONFIGURATION PANEL.
         m_shaderConfigPanel = transform.Find("ShaderConfigurationPanel").GetComponent<ShaderConfigurationPanel>();
 
-	    // SET THE DEFAULT SHADER.
+	    // INITIALIZE THE CONFIGURATION PANEL.
         InitializeDefaultShader();
+        InitializeDefaultModel();
 	}
 
     /// <summary>
@@ -36,6 +43,19 @@ public class TeamConfigurationPanel : MonoBehaviour
         // INITIALIZE THE SOLID COLOR SHADER CONFIGURATION GUI.
         ShaderConfigurationPanel shaderConfigPanel = transform.Find("ShaderConfigurationPanel").GetComponent<ShaderConfigurationPanel>();
         shaderConfigPanel.DisplaySolidColorShaderConfiguration();
+    }
+
+    /// <summary>
+    /// Initializes the default model for the panel.
+    /// </summary>
+    private void InitializeDefaultModel()
+    {
+        // ENABLE THE BOX MODEL AS THE INITIAL SELECTED ONE.
+        Toggle boxModelToggle = transform.Find("ModelToggles/BoxModelToggle").GetComponent<Toggle>();
+        boxModelToggle.isOn = true;
+
+        // DISPLAY THE BOX MODEL FOR THE EXAMPLE GAME OBJECT.
+        ExampleGameObject.DisplayBoxModel();
     }
 
     /// <summary>
