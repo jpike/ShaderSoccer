@@ -221,7 +221,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!54 &5400002
 Rigidbody:
@@ -236,7 +236,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!54 &5400004
 Rigidbody:
@@ -251,7 +251,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaab950ecaad9b458c049d50bb3d0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MovementControllerType: 0
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -314,7 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda19cebe4e32cd4ebb0f3e4de0dbc26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementControllerType: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda19cebe4e32cd4ebb0f3e4de0dbc26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementControllerType: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -338,7 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda19cebe4e32cd4ebb0f3e4de0dbc26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementControllerType: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

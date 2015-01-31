@@ -19,6 +19,25 @@ public class PlayerExampleGameObject : MonoBehaviour
     /// </summary>
     public GameObject BoxModelPrefab = null;
     /// <summary>
+    /// The prefab for the goalie line of players using
+    /// the box model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject BoxModelGoaliePrefab = null;
+    /// <summary>
+    /// The prefab for the midfielder line of players using
+    /// the box model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject BoxModelMidfielderPrefab = null;
+    /// <summary>
+    /// The prefab for the forward line of players using
+    /// the box model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject BoxModelForwardPrefab = null;
+
+    /// <summary>
     /// The toggle for displaying the banana model.
     /// </summary>
     public Toggle BananaModelToggle = null;
@@ -26,6 +45,25 @@ public class PlayerExampleGameObject : MonoBehaviour
     /// The prefab to display for the banana model.
     /// </summary>
     public GameObject BananaModelPrefab = null;
+    /// <summary>
+    /// The prefab for the goalie line of players using
+    /// the banana model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject BananaModelGoaliePrefab = null;
+    /// <summary>
+    /// The prefab for the midfielder line of players using
+    /// the banana model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject BananaModelMidfielderPrefab = null;
+    /// <summary>
+    /// The prefab for the forward line of players using
+    /// the banana model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject BananaModelForwardPrefab = null;
+
     /// <summary>
     /// The toggle for displaying the foosball player model.
     /// </summary>
@@ -35,6 +73,25 @@ public class PlayerExampleGameObject : MonoBehaviour
     /// </summary>
     public GameObject FoosballPlayerModelPrefab = null;
     /// <summary>
+    /// The prefab for the goalie line of players using
+    /// the foosball player model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject FoosballPlayerModelGoaliePrefab = null;
+    /// <summary>
+    /// The prefab for the midfielder line of players using
+    /// the foosball player model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject FoosballPlayerModelMidfielderPrefab = null;
+    /// <summary>
+    /// The prefab for the forward line of players using
+    /// the foosball player model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject FoosballPlayerModelForwardPrefab = null;
+
+    /// <summary>
     /// The toggle for displaying the jewel model.
     /// </summary>
     public Toggle JewelModelToggle = null;
@@ -42,6 +99,37 @@ public class PlayerExampleGameObject : MonoBehaviour
     /// The prefab to display for the jewel model.
     /// </summary>
     public GameObject JewelModelPrefab = null;
+    /// <summary>
+    /// The prefab for the goalie line of players using
+    /// the jewel model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject JewelModelGoaliePrefab = null;
+    /// <summary>
+    /// The prefab for the midfielder line of players using
+    /// the jewel model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject JewelModelMidfielderPrefab = null;
+    /// <summary>
+    /// The prefab for the forward line of players using
+    /// the jewel model.  Used for passing to the team
+    /// factories.
+    /// </summary>
+    public GameObject JewelModelForwardPrefab = null;
+
+    /// <summary>
+    /// The current goalie line prefab.
+    /// </summary>
+    public GameObject CurrentGoalieLinePrefab { get; private set; }
+    /// <summary>
+    /// The current midfielder line prefab.
+    /// </summary>
+    public GameObject CurrentMidfielderLinePrefab { get; private set; }
+    /// <summary>
+    /// The current forward line prefab.
+    /// </summary>
+    public GameObject CurrentForwardLinePrefab { get; private set; }
 
     /// <summary>
     /// The model currently being displayed for the example player game object.
@@ -94,6 +182,11 @@ public class PlayerExampleGameObject : MonoBehaviour
         m_currentPlayerModel = Instantiate(BoxModelPrefab) as GameObject;
         m_currentPlayerModel.transform.position = this.transform.position;
         m_currentPlayerModel.renderer.material = m_currentMaterial;
+
+        // SET THE CURRENT PLAYER LINE PREFABS.
+        CurrentGoalieLinePrefab = BoxModelGoaliePrefab;
+        CurrentMidfielderLinePrefab = BoxModelMidfielderPrefab;
+        CurrentForwardLinePrefab = BoxModelForwardPrefab;
     }
 
     /// <summary>
@@ -118,6 +211,11 @@ public class PlayerExampleGameObject : MonoBehaviour
         m_currentPlayerModel = Instantiate(BananaModelPrefab) as GameObject;
         m_currentPlayerModel.transform.position = this.transform.position;
         m_currentPlayerModel.renderer.material = m_currentMaterial;
+
+        // SET THE CURRENT PLAYER LINE PREFABS.
+        CurrentGoalieLinePrefab = BananaModelGoaliePrefab;
+        CurrentMidfielderLinePrefab = BananaModelMidfielderPrefab;
+        CurrentForwardLinePrefab = BananaModelForwardPrefab;
     }
 
     /// <summary>
@@ -142,6 +240,11 @@ public class PlayerExampleGameObject : MonoBehaviour
         m_currentPlayerModel = Instantiate(FoosballPlayerModelPrefab) as GameObject;
         m_currentPlayerModel.transform.position = this.transform.position;
         m_currentPlayerModel.renderer.material = m_currentMaterial;
+
+        // SET THE CURRENT PLAYER LINE PREFABS.
+        CurrentGoalieLinePrefab = FoosballPlayerModelGoaliePrefab;
+        CurrentMidfielderLinePrefab = FoosballPlayerModelMidfielderPrefab;
+        CurrentForwardLinePrefab = FoosballPlayerModelForwardPrefab;
     }
 
     /// <summary>
@@ -166,6 +269,11 @@ public class PlayerExampleGameObject : MonoBehaviour
         m_currentPlayerModel = Instantiate(JewelModelPrefab) as GameObject;
         m_currentPlayerModel.transform.position = this.transform.position;
         m_currentPlayerModel.renderer.material = m_currentMaterial;
+
+        // SET THE CURRENT PLAYER LINE PREFABS.
+        CurrentGoalieLinePrefab = JewelModelGoaliePrefab;
+        CurrentMidfielderLinePrefab = JewelModelMidfielderPrefab;
+        CurrentForwardLinePrefab = JewelModelForwardPrefab;
     }
 
     /// <summary>

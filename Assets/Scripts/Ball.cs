@@ -123,6 +123,11 @@ public class Ball : MonoBehaviour
         // REFLECT THE DIRECTION OF THE BALL.
         Direction = Vector3.Reflect(Direction, collidedSurfaceNormal);
 
+        // Force the Z coordinate to zero to ensure the ball stays in the 2D plane.
+        // For some models, the surface normals may cause the ball to bounce in
+        // different directions.
+        Direction.z = 0.0f;
+
         // INCREASE THE MOVEMENT SPEED IF APPLICABLE.
         // The movement speed should only increase if the maximum limit hasn't been reached.
         MoveSpeedInMetersPerSecond += SpeedIncreasePerCollision;

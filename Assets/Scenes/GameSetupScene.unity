@@ -3778,13 +3778,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxModelToggle: {fileID: 1904186412}
   BoxModelPrefab: {fileID: 100000, guid: 60a1a7076d4ef1348963f8258b063153, type: 2}
+  BoxModelGoaliePrefab: {fileID: 100002, guid: b5f12c6d206b5c74e9959c8a6035ccf5, type: 2}
+  BoxModelMidfielderPrefab: {fileID: 100006, guid: 7944bd0aa68ef8a4eb5a3dc087ae19a8,
+    type: 2}
+  BoxModelForwardPrefab: {fileID: 100004, guid: 908c80cc206f5b7469a85fb4e551820e,
+    type: 2}
   BananaModelToggle: {fileID: 632382875}
   BananaModelPrefab: {fileID: 100000, guid: 8561c093d03de6a42b2baa23969cb74e, type: 2}
+  BananaModelGoaliePrefab: {fileID: 100002, guid: 5b1b67606e52e72419390a9d1a0daaa7,
+    type: 2}
+  BananaModelMidfielderPrefab: {fileID: 100006, guid: e2c1166a62d597f45836fbd51092a308,
+    type: 2}
+  BananaModelForwardPrefab: {fileID: 100004, guid: f213352603c79f149acd15c4aa333384,
+    type: 2}
   FoosballPlayerModelToggle: {fileID: 1528531326}
   FoosballPlayerModelPrefab: {fileID: 100000, guid: 0189a700482a2b44ab3c0cf290a12d78,
     type: 2}
+  FoosballPlayerModelGoaliePrefab: {fileID: 100002, guid: 8e8023cb1164a4c42803df5e6e4fb754,
+    type: 2}
+  FoosballPlayerModelMidfielderPrefab: {fileID: 100006, guid: ffc85c11ff2ba524fb1df3edecc9fa67,
+    type: 2}
+  FoosballPlayerModelForwardPrefab: {fileID: 100004, guid: 43c584df8bf768c42a37cfa38390ce3e,
+    type: 2}
   JewelModelToggle: {fileID: 216637296}
   JewelModelPrefab: {fileID: 100000, guid: 724636d97c0b2254fb828879a9906656, type: 2}
+  JewelModelGoaliePrefab: {fileID: 100002, guid: 6bef6b49c2a76334480d7fa565c5d4ca,
+    type: 2}
+  JewelModelMidfielderPrefab: {fileID: 100006, guid: 5102594478ecae043aac24ace83b0c20,
+    type: 2}
+  JewelModelForwardPrefab: {fileID: 100004, guid: 68a23e4bdeeebd5499bebdce3014e9d3,
+    type: 2}
 --- !u!1 &1414355075
 GameObject:
   m_ObjectHideFlags: 0
@@ -5070,13 +5093,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxModelToggle: {fileID: 835880025}
   BoxModelPrefab: {fileID: 100000, guid: 60a1a7076d4ef1348963f8258b063153, type: 2}
+  BoxModelGoaliePrefab: {fileID: 100002, guid: b5f12c6d206b5c74e9959c8a6035ccf5, type: 2}
+  BoxModelMidfielderPrefab: {fileID: 100006, guid: 7944bd0aa68ef8a4eb5a3dc087ae19a8,
+    type: 2}
+  BoxModelForwardPrefab: {fileID: 100004, guid: 908c80cc206f5b7469a85fb4e551820e,
+    type: 2}
   BananaModelToggle: {fileID: 1484298822}
   BananaModelPrefab: {fileID: 100000, guid: 8561c093d03de6a42b2baa23969cb74e, type: 2}
+  BananaModelGoaliePrefab: {fileID: 100002, guid: 5b1b67606e52e72419390a9d1a0daaa7,
+    type: 2}
+  BananaModelMidfielderPrefab: {fileID: 100006, guid: e2c1166a62d597f45836fbd51092a308,
+    type: 2}
+  BananaModelForwardPrefab: {fileID: 100004, guid: f213352603c79f149acd15c4aa333384,
+    type: 2}
   FoosballPlayerModelToggle: {fileID: 486496971}
   FoosballPlayerModelPrefab: {fileID: 100000, guid: 0189a700482a2b44ab3c0cf290a12d78,
     type: 2}
+  FoosballPlayerModelGoaliePrefab: {fileID: 100002, guid: 8e8023cb1164a4c42803df5e6e4fb754,
+    type: 2}
+  FoosballPlayerModelMidfielderPrefab: {fileID: 100006, guid: ffc85c11ff2ba524fb1df3edecc9fa67,
+    type: 2}
+  FoosballPlayerModelForwardPrefab: {fileID: 100004, guid: 43c584df8bf768c42a37cfa38390ce3e,
+    type: 2}
   JewelModelToggle: {fileID: 1732891243}
   JewelModelPrefab: {fileID: 100000, guid: 724636d97c0b2254fb828879a9906656, type: 2}
+  JewelModelGoaliePrefab: {fileID: 100002, guid: 6bef6b49c2a76334480d7fa565c5d4ca,
+    type: 2}
+  JewelModelMidfielderPrefab: {fileID: 100006, guid: 5102594478ecae043aac24ace83b0c20,
+    type: 2}
+  JewelModelForwardPrefab: {fileID: 100004, guid: 68a23e4bdeeebd5499bebdce3014e9d3,
+    type: 2}
 --- !u!1 &1902570988
 GameObject:
   m_ObjectHideFlags: 0

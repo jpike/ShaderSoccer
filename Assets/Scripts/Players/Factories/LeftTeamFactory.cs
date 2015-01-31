@@ -11,18 +11,6 @@ using UnityEngine;
 public class LeftTeamFactory : MonoBehaviour
 {
     /// <summary>
-    /// The prefab for the player line containing the goalie.
-    /// </summary>
-    public GameObject GoalieLinePrefab = null;
-    /// <summary>
-    /// The prefab for the player line containing midfielders.
-    /// </summary>
-    public GameObject MidfielderLinePrefab = null;
-    /// <summary>
-    /// The prefab for the player line containing forwards.
-    /// </summary>
-    public GameObject ForwardLinePrefab = null;
-    /// <summary>
     /// The prefab for the GUI toggle button for controlling
     /// whether the team is controlled by human user input
     /// or computer AI.
@@ -33,6 +21,19 @@ public class LeftTeamFactory : MonoBehaviour
     /// currently active.
     /// </summary>
     public GameObject ActivePlayerLineVisualIndicatorPrefab = null;
+
+    /// <summary>
+    /// The prefab for the player line containing the goalie.
+    /// </summary>
+    public static GameObject GoalieLinePrefab = null;
+    /// <summary>
+    /// The prefab for the player line containing midfielders.
+    /// </summary>
+    public static GameObject MidfielderLinePrefab = null;
+    /// <summary>
+    /// The prefab for the player line containing forwards.
+    /// </summary>
+    public static GameObject ForwardLinePrefab = null;
 
     /// <summary>
     /// The material to use for shading the players in the team.

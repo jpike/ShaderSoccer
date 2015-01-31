@@ -608,9 +608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5ef1d94c2a7004d8f542bc49cb4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalieLinePrefab: {fileID: 100002, guid: b5f12c6d206b5c74e9959c8a6035ccf5, type: 2}
-  MidfielderLinePrefab: {fileID: 100006, guid: 7944bd0aa68ef8a4eb5a3dc087ae19a8, type: 2}
-  ForwardLinePrefab: {fileID: 100004, guid: 908c80cc206f5b7469a85fb4e551820e, type: 2}
   ControlToggleButtonPrefab: {fileID: 100000, guid: 5be54a4c34c839a4393253e0a6c8a321,
     type: 2}
   ActivePlayerLineVisualIndicatorPrefab: {fileID: 100000, guid: 5cfdb6a6ac332574c8e65048e8beba35,
@@ -1040,9 +1037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f40271978152a247b088f794cd3c54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalieLinePrefab: {fileID: 100002, guid: b5f12c6d206b5c74e9959c8a6035ccf5, type: 2}
-  MidfielderLinePrefab: {fileID: 100006, guid: 7944bd0aa68ef8a4eb5a3dc087ae19a8, type: 2}
-  ForwardLinePrefab: {fileID: 100004, guid: 908c80cc206f5b7469a85fb4e551820e, type: 2}
   ControlToggleButtonPrefab: {fileID: 100000, guid: 5be54a4c34c839a4393253e0a6c8a321,
     type: 2}
   ActivePlayerLineVisualIndicatorPrefab: {fileID: 100000, guid: 5cfdb6a6ac332574c8e65048e8beba35,

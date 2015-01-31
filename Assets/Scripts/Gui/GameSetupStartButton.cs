@@ -20,13 +20,25 @@ public class GameSetupStartButton : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        // INITIALIZE THE LEFT TEAM.
+        // INITIALIZE THE LEFT TEAM'S MATERIAL.
         TeamConfigurationPanel leftTeamConfiguration = GameObject.Find("LeftTeamConfigurationPanel").GetComponent<TeamConfigurationPanel>();
         LeftTeamFactory.TeamMaterial = leftTeamConfiguration.GetMaterial();
 
-        // INITIALIZE THE RIGHT TEAM.
+        // INITIALIZE THE LEFT TEAM'S PLAYER LINE PREFABS.
+        PlayerExampleGameObject leftTeamExampleGameObject = GameObject.Find("LeftPlayerExampleGameObject").GetComponent<PlayerExampleGameObject>();
+        LeftTeamFactory.GoalieLinePrefab = leftTeamExampleGameObject.CurrentGoalieLinePrefab;
+        LeftTeamFactory.MidfielderLinePrefab = leftTeamExampleGameObject.CurrentMidfielderLinePrefab;
+        LeftTeamFactory.ForwardLinePrefab = leftTeamExampleGameObject.CurrentForwardLinePrefab;
+
+        // INITIALIZE THE RIGHT TEAM'S MATERIAL.
         TeamConfigurationPanel rightTeamConfiguration = GameObject.Find("RightTeamConfigurationPanel").GetComponent<TeamConfigurationPanel>();
         RightTeamFactory.TeamMaterial = rightTeamConfiguration.GetMaterial();
+
+        // INITIALIZE THE RIGHT TEAM'S PLAYER LINE PREFABS.
+        PlayerExampleGameObject rightTeamExampleGameObject = GameObject.Find("RightPlayerExampleGameObject").GetComponent<PlayerExampleGameObject>();
+        RightTeamFactory.GoalieLinePrefab = rightTeamExampleGameObject.CurrentGoalieLinePrefab;
+        RightTeamFactory.MidfielderLinePrefab = rightTeamExampleGameObject.CurrentMidfielderLinePrefab;
+        RightTeamFactory.ForwardLinePrefab = rightTeamExampleGameObject.CurrentForwardLinePrefab;
 
         // START THE MAIN GAMEPLAY.
         SceneLoader.LoadScene("GameplayScene");
