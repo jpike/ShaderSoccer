@@ -446,7 +446,10 @@ MonoBehaviour:
   m_Text: 'Jacob Pike - Project Lead/Programming
 
 
-    Chris DeLeon - 3D Player Models'
+    Chris DeLeon - 3D Player Models
+
+
+    Lance Lockwood - Background Music'
 --- !u!222 &1518021040
 CanvasRenderer:
   m_ObjectHideFlags: 0
