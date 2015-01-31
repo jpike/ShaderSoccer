@@ -102,6 +102,11 @@ public class Ball : MonoBehaviour
         float elapsedTimeInSeconds = Time.deltaTime;
         Vector3 movementInMeters = MoveSpeedInMetersPerSecond * elapsedTimeInSeconds * Direction;
         Vector3 newBallPosition = rigidbody.position + movementInMeters;
+
+        // Make sure the new ball position maintains a z-coordinate of zero so that
+        // collisions will be properly maintained.
+        newBallPosition.z = 0.0f;
+
         rigidbody.MovePosition(newBallPosition);
     }
     #endregion
