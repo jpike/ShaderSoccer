@@ -1123,6 +1123,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 893654362}
   - 82: {fileID: 893654361}
+  - 114: {fileID: 893654363}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -1138,13 +1139,13 @@ AudioSource:
   m_GameObject: {fileID: 893654360}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: edc73eb8a51023e4ba52b20186df2d6f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b2288468355957940a375da4c6f7ee44, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
-  Priority: 128
+  Priority: 70
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1200,6 +1201,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!114 &893654363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 893654360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2b4a7b07edfe4419073d937a5fcb4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Music: {fileID: 893654361}
 --- !u!1 &928249683
 GameObject:
   m_ObjectHideFlags: 0
