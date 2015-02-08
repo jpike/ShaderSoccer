@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
   m_Layer: 0
-  m_Name: MenuBackgroundMusic
+  m_Name: GameplayBackgroundMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 8b7cc68699a8cb7488962513ca42a42f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b2288468355957940a375da4c6f7ee44, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Music: {fileID: 8200000}
   MinVolume: .100000001
-  MaxVolume: .75
-  VolumeIncreasePerSecond: .5
+  MaxVolume: 1
+  VolumeIncreasePerSecond: .100000001
   VolumeDecreasePerSecond: .5
 --- !u!1001 &100100000
 Prefab:

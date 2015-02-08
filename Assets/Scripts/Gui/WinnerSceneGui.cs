@@ -13,10 +13,6 @@ public class WinnerSceneGui : MonoBehaviour
     /// </summary>
 	void Start()
     {
-        // START PLAYING THE MENU BACKGROUND MUSIC.
-        // The main gameplay is over, so the menu background music should resume.
-        MenuBackgroundMusic.StartMusic();
-
         // SET THE TEXT IDENTIFYING THE WINNING TEAM.
         Text winningTeamText = GameObject.Find("WinnerText").GetComponent<Text>();
         switch (Referee.Winner)
