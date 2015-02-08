@@ -31,7 +31,7 @@ GameObject:
   - 23: {fileID: 2300002}
   m_Layer: 0
   m_Name: PlayFieldRightBoundary
-  m_TagString: Untagged
+  m_TagString: PlayFieldBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -49,7 +49,7 @@ GameObject:
   - 23: {fileID: 2300004}
   m_Layer: 0
   m_Name: PlayFieldLeftBoundary
-  m_TagString: Untagged
+  m_TagString: PlayFieldBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -67,7 +67,7 @@ GameObject:
   - 23: {fileID: 2300006}
   m_Layer: 0
   m_Name: PlayFieldBottomBoundary
-  m_TagString: Untagged
+  m_TagString: PlayFieldBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -85,7 +85,7 @@ GameObject:
   - 23: {fileID: 2300008}
   m_Layer: 0
   m_Name: PlayFieldTopBoundary
-  m_TagString: Untagged
+  m_TagString: PlayFieldBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

@@ -6,14 +6,11 @@
 /// </summary>
 public class Ball : MonoBehaviour
 {
-    #region Public Constants
     /// <summary>
     /// The name of the ball game object.
     /// </summary>
     public const string BALL_OBJECT_NAME = "Ball";
-    #endregion
 
-    #region Public Fields
     /// <summary>
     /// The direction of the ball's movement.  It may be updated
     /// as the direction changes.
@@ -36,9 +33,12 @@ public class Ball : MonoBehaviour
     /// then collisions may not properly work.
     /// </summary>
     public float MaxSpeedInMetersPerSecond = 10.0f;
-    #endregion
 
-    #region Public Properties
+    /// <summary>
+    /// The audio clips to play when a collision occurs.
+    /// </summary>
+    public AudioClip[] CollisionSounds = null;
+
     /// <summary>
     /// Retrieves the world boundaries of the ball.
     /// </summary>
@@ -59,9 +59,7 @@ public class Ball : MonoBehaviour
             }
         }
     }
-    #endregion
 
-    #region Public Methods
     /// <summary>
     /// Resets the ball to its initial position in the center of the playing
     /// field and starts it moving at a random direction.
@@ -89,9 +87,7 @@ public class Ball : MonoBehaviour
         // SET THE NEW DIRECTION FOR THE BALL.
         Direction = new Vector3(newXDirection, newYDirection, NO_Z_DIRECTION);
     }
-    #endregion
 
-    #region Update Methods
     /// <summary>
     /// Moves the ball based on elapsed time.  Since the ball interacts
     /// with the physics engine, this is done during a fixed update.
@@ -109,9 +105,7 @@ public class Ball : MonoBehaviour
 
         rigidbody.MovePosition(newBallPosition);
     }
-    #endregion
 
-    #region Collison Methods
     /// <summary>
     /// Handles collisions of the ball by reflecting its direction
     /// and increasing its speed (if there is room left to increase).
@@ -137,6 +131,28 @@ public class Ball : MonoBehaviour
         // The movement speed should only increase if the maximum limit hasn't been reached.
         MoveSpeedInMetersPerSecond += SpeedIncreasePerCollision;
         MoveSpeedInMetersPerSecond = Mathf.Clamp(MoveSpeedInMetersPerSecond, 0.0f, MaxSpeedInMetersPerSecond);
+
+        // PLAY A RANDOM COLLISION SOUND IF FIELD BOUNDARY WASN'T COLLIDED WITH.
+        // This should result in sounds only being played when the ball hits a player.
+        bool collidedWithPlayer = ("PlayFieldBoundary" != collision.gameObject.tag);
+        if (collidedWithPlayer)
+        {
+            PlayRandomCollisionSound();
+        }
     }
-    #endregion
+
+    /// <summary>
+    /// Plays a random collision sound from those configured for this ball.
+    /// </summary>
+    private void PlayRandomCollisionSound()
+    {
+        // DETERMINE THE RANDOM SOUND EFFECT TO PLAY.
+        int randomSoundIndex = Random.Range(0, CollisionSounds.Length);
+        AudioClip randomCollisionSound = CollisionSounds[randomSoundIndex];
+
+        // PLAY THE RANDOM SOUND EFFECT.
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = randomCollisionSound;
+        audioSource.PlayOneShot(randomCollisionSound);
+    }
 }

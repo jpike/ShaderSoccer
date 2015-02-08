@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
+  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -74,6 +75,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: .5
+  m_Pitch: 1.5
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,6 +148,19 @@ MonoBehaviour:
   MoveSpeedInMetersPerSecond: 2
   SpeedIncreasePerCollision: .100000001
   MaxSpeedInMetersPerSecond: 10
+  CollisionSounds:
+  - {fileID: 8300000, guid: e9c8e8dcf7b46864289c140994a0e2df, type: 3}
+  - {fileID: 8300000, guid: 3d31b9b0c7c8f2b419525a73cac6a827, type: 3}
+  - {fileID: 8300000, guid: ababd21886aa3b84a9c30a804a3af0fb, type: 3}
+  - {fileID: 8300000, guid: 0c149bf13622a6e45807f079f6dd0115, type: 3}
+  - {fileID: 8300000, guid: 71ccb01d3b766b14e874b218a115001a, type: 3}
+  - {fileID: 8300000, guid: f6c48dcfabc3e67428a54bd1ca05e943, type: 3}
+  - {fileID: 8300000, guid: c4d44ea0d5977c347a682e01c6d6f1bd, type: 3}
+  - {fileID: 8300000, guid: 540208253de8a5749a58f7fd7ec55a3e, type: 3}
+  - {fileID: 8300000, guid: 6df52236c062b6b43ad72902037d62c6, type: 3}
+  - {fileID: 8300000, guid: 76bc942e41eef774dbf3283399295b0e, type: 3}
+  - {fileID: 8300000, guid: 0e9fa99d4f8357242b2e590331a57e9e, type: 3}
+  - {fileID: 8300000, guid: 1793213c35592bc4e8045a21510a088a, type: 3}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
