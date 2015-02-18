@@ -38,6 +38,15 @@ public class ShaderConfigurationPanel : MonoBehaviour
     public GameObject DiffuseShaderConfigGuiPrefab = null;
 
     /// <summary>
+    /// The toggle button for the specular shader.
+    /// </summary>
+    public Toggle SpecularShaderToggle = null;
+    /// <summary>
+    /// The prefab for the configuration GUI for the specular shader.
+    /// </summary>
+    public GameObject SpecularShaderConfigGuiPrefab = null;
+
+    /// <summary>
     /// Retrieves the material currently configured for the team.
     /// </summary>
     /// <returns>The material configured for the team.</returns>
@@ -107,6 +116,37 @@ public class ShaderConfigurationPanel : MonoBehaviour
 
         // INITIALIZE THE DIFFUSE SHADER CONFIGURATION GUI.
         CurrentShaderConfigGui.GetComponent<DiffuseShaderConfigGui>().Initialize(
+            ExampleGameObject);
+    }
+
+    /// <summary>
+    /// Displays the configuration settings for the specular
+    /// shader in the configuration panel, if the
+    /// toggle is on.
+    /// </summary>
+    public void DisplaySpecularShaderConfiguration()
+    {
+        // CHECK IF THE SPECULAR COLOR SHADER TOGGLE WAS ENABLED.
+        if (!SpecularShaderToggle.isOn)
+        {
+            // There is nothing to do.  It is the responsibility
+            // of other code in this class to clear the configuration
+            // panel of any leftover GUI components.
+            return;
+        }
+
+        // CLEAR THE SHADER CONFIGURATION PANEL.
+        Destroy(CurrentShaderConfigGui);
+
+        // POPULATE THE DIFFUSE SHADER CONFIGURATION IN THE PANEL.
+        CurrentShaderConfigGui = Instantiate(SpecularShaderConfigGuiPrefab) as GameObject;
+        CurrentShaderConfigGui.transform.SetParent(this.transform);
+        /// @todo   Research and document why these need to be set.
+        CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+
+        // INITIALIZE THE SPECULAR SHADER CONFIGURATION GUI.
+        CurrentShaderConfigGui.GetComponent<SpecularShaderConfigGui>().Initialize(
             ExampleGameObject);
     }
 }

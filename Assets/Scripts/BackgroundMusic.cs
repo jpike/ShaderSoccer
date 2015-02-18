@@ -12,14 +12,13 @@ public class BackgroundMusic : MonoBehaviour
     public AudioSource Music = null;
 
     /// <summary>
-    /// The minimum volume for the music.  When starting,
-    /// the music will start at this volume.  When stopping,
+    /// The minimum volume for the music.  When fading out,
     /// the music will fade out to this volume.
     /// </summary>
-    public float MinVolume = 0.1f;
+    public float MinVolume = 0.0f;
 
     /// <summary>
-    /// The maximum volume for the music.  When starting,
+    /// The maximum volume for the music.  When fading in,
     /// the music will fade in to this volume.
     /// </summary>
     public float MaxVolume = 1.0f;
@@ -35,56 +34,67 @@ public class BackgroundMusic : MonoBehaviour
     public float VolumeDecreasePerSecond = 0.5f;
 
     /// <summary>
-    /// If the music is currently being started (fading in).
+    /// If the music is currently being faded in.
     /// </summary>
-    private bool m_isStarting = false;
+    private bool m_isFadingIn = false;
 
     /// <summary>
-    /// If the music is currently being stopped (fading out).
+    /// If the music is currently being faded out.
     /// </summary>
-    private bool m_isStopping = false;
+    private bool m_isFadingOut = false;
 
     /// <summary>
-    /// Starts playing the background music over time.
+    /// Starts playing the background music.
     /// </summary>
     public void StartPlaying()
     {
-        // Make sure that starting/stopping don't interfere
-        // with each other.
-        m_isStopping = false;
-
-        // Even if the music is already playing, toggle the
-        // flag indicating that it is starting to allow it
-        // to continue to fade in if necessary.  Otherwise,
-        // a scenario could occur where the background music
-        // stops entirely.
-        m_isStarting = true;
-
         // Only start playing the music if it isn't already playing.
         // We don't want duplicate instances of the music playing.
         if (!Music.isPlaying)
         {
-            // Reset the audio volume to zero to start fading
-            // it in as the music plays.
-            Music.volume = MinVolume;
             Music.Play();
         }
     }
 
     /// <summary>
-    /// Stops playing the background music over time.
+    /// Stops playing the background music.
     /// </summary>
     public void StopPlaying()
     {
-        // Make sure that starting/stopping don't interfere
-        // with each other.
-        m_isStarting = false;
+        Music.Stop();
+    }
 
-        // Start stopping the music.  This flag will
+    /// <summary>
+    /// Starts fading in the background music over time.
+    /// </summary>
+    public void StartFadeIn()
+    {
+        // Make sure that fading in and out don't interfere
+        // with each other.
+        m_isFadingOut = false;
+
+        // Even if the music is already fading in, toggle the
+        // flag indicating that it is fading in to allow it
+        // to continue to fade in if necessary.  Otherwise,
+        // a scenario could occur where the background music
+        // stops entirely.
+        m_isFadingIn = true;
+    }
+
+    /// <summary>
+    /// Starts fading out the background music over time.
+    /// </summary>
+    public void StartFadeOut()
+    {
+        // Make sure that fading in and out don't interfere
+        // with each other.
+        m_isFadingIn = false;
+
+        // Start fading out the music.  This flag will
         // trigger the update loop to fade out the
         // music volume and then ultimately pause
         // the music.
-        m_isStopping = true;
+        m_isFadingOut = true;
     }
 
     /// <summary>
@@ -97,7 +107,7 @@ public class BackgroundMusic : MonoBehaviour
         if (maxVolumeReached)
         {
             // This volume doesn't need to be increased any more.
-            m_isStarting = false;
+            m_isFadingIn = false;
             return;
         }
 
@@ -115,9 +125,9 @@ public class BackgroundMusic : MonoBehaviour
         if (minVolumeReached)
         {
             // This volume doesn't need to be decreased any more,
-            // so go ahead and stop it.
-            m_isStopping = false;
-            Music.Pause();
+            // so go ahead and stop fading out.
+            m_isFadingOut = false;
+
             return;
         }
 
@@ -127,15 +137,15 @@ public class BackgroundMusic : MonoBehaviour
 
     /// <summary>
     /// Updates the volume of the music depending on
-    /// if playing of the music is starting or stopping.
+    /// if playing of the music is fading in or out.
     /// </summary>
     private void Update()
     {
-        if (m_isStarting)
+        if (m_isFadingIn)
         {
             FadeIn();
         }
-        else if (m_isStopping)
+        else if (m_isFadingOut)
         {
             FadeOut();
         }

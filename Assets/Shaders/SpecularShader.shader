@@ -1,10 +1,12 @@
-﻿/// Colors an object with diffuse or Lambertian shading.
+﻿/// Colors an object with diffuse and specular shading.
 /// Ambient light and a single point light source are both taken into account.
-Shader "Custom/DiffuseShader" 
+Shader "Custom/SpecularShader" 
 {
 	Properties 
     {
 		_DiffuseColor ("DiffuseColor", Color) = (0.0, 0.0, 0.0, 1.0)
+        _SpecularColor ("SpecularColor", Color) = (0.0, 0.0, 0.0, 1.0)
+        _SpecularPower ("SpecularPower", Float) = 1.0
         _AmbientColor ("AmbientColor", Color) = (0.0, 0.0, 0.0, 1.0)
         _LightColor ("LightColor", Color) = (0.0, 0.0, 0.0, 1.0)
         _LightWorldPosition ("LightWorldPosition", Vector) = (0.0, 0.0, 0.0, 1.0)
@@ -21,6 +23,10 @@ Shader "Custom/DiffuseShader"
 
             /// The diffuse color of the surface of the object.
             uniform fixed4 _DiffuseColor;
+            /// The specular color of the surface of the object.
+            uniform fixed4 _SpecularColor;
+            /// The exponent that controls the sharpness of specular highlights.
+            uniform float _SpecularPower;
             /// The ambient light color.  A custom ambient light color,
             /// rather than Unity's built-in uniform, was chosen because
             /// to get shading close to Unity's built-in shaders, the
@@ -53,9 +59,9 @@ Shader "Custom/DiffuseShader"
             };
 
             /// Transforms the vertex into normalized device coordinates
-            /// and computes the diffuse color for the vertex.
+            /// and computes the diffuse and specular color for the vertex.
             /// @param[in]  vertex - Information about the vertex.
-            /// @return     The transformed vertex and diffuse color.
+            /// @return     The transformed vertex and diffuse/specular color.
             VertexOutput VertexShading(VertexInput vertex)
             {
                 // CALCULATE THE DIRECTION FROM THE VERTEX TO THE LIGHT.
@@ -84,8 +90,31 @@ Shader "Custom/DiffuseShader"
                 fixed3 diffuseReflectance = _DiffuseColor.rgb * (
                     _AmbientColor.rgb + _LightColor.rgb * vertexIllumination);
 
+                // CALCULATE THE DIRECTION FROM THE VERTEX TO THE CAMERA.
+                float3 cameraDirection = _WorldSpaceCameraPos - vertexWorldPosition;
+                float3 unitCameraDirection = normalize(cameraDirection);
+
+                // CALCULATE THE IDEAL REFLECTED DIRECTION.
+                // The ideal reflected direction is exactly mirrored across the surface normal.
+                float3 lightDirectionProjectedOntoNormal = dot(unitLightDirection, unitNormal) * unitNormal;
+                float3 idealReflectedDirection = -unitLightDirection + 2 * lightDirectionProjectedOntoNormal;
+                float3 unitIdealReflectedDirection = normalize(idealReflectedDirection);
+
+                // COMPUTE THE SPECULAR COLOR.
+                // The strengh of the specular highlight should be greater as the angle between the camera and
+                // ideal reflected direction decreases.  The cosine function has this property, which can be
+                // calculated using a dot product.  To prevent specular highlights from appearing incorrectly
+                // on the opposite side of the surface, the strength must be clamped to zero to account for the
+                // case where the dot product is negative.
+                float specularHighlightStrength = max(0.0, dot(unitCameraDirection, unitIdealReflectedDirection));
+                // The specular power keeps the highlight from becoming too large, shrinking it to become a more
+                // realistic size.
+                float specularHighlight = pow(specularHighlightStrength, _SpecularPower);
+                fixed3 specularReflectance = _SpecularColor.rgb * _LightColor.rgb * specularHighlight;
+
+                // POPULATE THE FINAL COLOR.
                 VertexOutput finalVertex;
-                finalVertex.color = fixed4(diffuseReflectance, 1.0);
+                finalVertex.color = fixed4(diffuseReflectance + specularReflectance, 1.0);
 
                 // TRANSFORM THE VERTEX POSITION INTO THE CANONICAL VIEW VOLUME.
                 finalVertex.transformedPosition = mul(UNITY_MATRIX_MVP, vertex.vertex);
@@ -94,7 +123,7 @@ Shader "Custom/DiffuseShader"
             }
 
             /// Returns the color of the fragment.
-            /// @return The diffuse color, as computed in the vertex shader and interpolated.
+            /// @return The shaded color, as computed in the vertex shader and interpolated.
             fixed4 FragmentShading(VertexOutput input) : COLOR
             {
                 return input.color;

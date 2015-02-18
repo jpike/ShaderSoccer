@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Music: {fileID: 8200000}
-  MinVolume: .100000001
+  MinVolume: 0
   MaxVolume: .75
   VolumeIncreasePerSecond: .5
   VolumeDecreasePerSecond: .5

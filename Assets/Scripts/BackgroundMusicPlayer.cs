@@ -63,7 +63,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
             // Start playing the initial background music.
             // This is needed because the OnLevelWasLoaded callback
             // doesn't get called initially for the first scene.
-            StartMenuBackgroundMusic();
+            InitializeBackgroundMusic();
         }
     }
 
@@ -84,26 +84,44 @@ public class BackgroundMusicPlayer : MonoBehaviour
         switch (sceneIndex)
         {
             case TITLE_SCENE_INDEX:
-                StopGameplayBackgroundMusic();
-                StartMenuBackgroundMusic();
+                FadeOutGameplayBackgroundMusic();
+                FadeInMenuBackgroundMusic();
                 break;
             case CREDITS_SCENE_INDEX:
-                StopGameplayBackgroundMusic();
-                StartMenuBackgroundMusic();
+                FadeOutGameplayBackgroundMusic();
+                FadeInMenuBackgroundMusic();
                 break;
             case GAME_SETUP_SCENE_INDEX:
-                StopGameplayBackgroundMusic();
-                StartMenuBackgroundMusic();
+                FadeOutGameplayBackgroundMusic();
+                FadeInMenuBackgroundMusic();
                 break;
             case GAMEPLAY_SCENE_INDEX:
-                StopMenuBackgroundMusic();
-                StartGameplayBackgroundMusic();
+                FadeOutMenuBackgroundMusic();
+                FadeInGameplayBackgroundMusic();
                 break;
             case WINNER_SCENE_INDEX:
-                StopGameplayBackgroundMusic();
-                StartMenuBackgroundMusic();
+                FadeOutGameplayBackgroundMusic();
+                FadeInMenuBackgroundMusic();
                 break;
         }
+    }
+
+    /// <summary>
+    /// Starts playing the background music for the first time
+    /// in the game.
+    /// </summary>
+    private void InitializeBackgroundMusic()
+    {
+        // START PLAYING BOTH INSTANCES OF BACKGROUND MUSIC.
+        // To have smoother transitions between the different instances of background music,
+        // both need to be started at the same time so that they are synchronized when transitioning
+        // between scenes.  The volumes will simply be faded in or out, depending on which song
+        // is being played.
+        StartMenuBackgroundMusic();
+        StartGameplayBackgroundMusic();
+
+        // The menu background music should start playing first.
+        FadeInMenuBackgroundMusic();
     }
 
     /// <summary>
@@ -126,7 +144,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts playing the menu background music over time.
+    /// Starts playing the menu background music.
     /// </summary>
     private void StartMenuBackgroundMusic()
     {
@@ -138,7 +156,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops playing the menu background music over time.
+    /// Stops playing the menu background music.
     /// </summary>
     private void StopMenuBackgroundMusic()
     {
@@ -147,6 +165,30 @@ public class BackgroundMusicPlayer : MonoBehaviour
 
         // STOP PLAYING THE BACKGROUND MUSIC.
         m_menuBackgroundMusic.GetComponent<BackgroundMusic>().StopPlaying();
+    }
+
+    /// <summary>
+    /// Fades in the menu background music over time.
+    /// </summary>
+    private void FadeInMenuBackgroundMusic()
+    {
+        // ENSURE THAT THE BACKGROUND MUSIC EXISTS.
+        CreateMenuBackgroundMusicIfNotExists();
+
+        // FADE IN THE BACKGROUND MUSIC.
+        m_menuBackgroundMusic.GetComponent<BackgroundMusic>().StartFadeIn();
+    }
+
+    /// <summary>
+    /// Fades out the menu background music over time.
+    /// </summary>
+    private void FadeOutMenuBackgroundMusic()
+    {
+        // ENSURE THAT THE BACKGROUND MUSIC EXISTS.
+        CreateMenuBackgroundMusicIfNotExists();
+
+        // FADE OUT THE BACKGROUND MUSIC.
+        m_menuBackgroundMusic.GetComponent<BackgroundMusic>().StartFadeOut();
     }
 
     /// <summary>
@@ -169,7 +211,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts playing the gameplay background music over time.
+    /// Starts playing the gameplay background music.
     /// </summary>
     private void StartGameplayBackgroundMusic()
     {
@@ -181,7 +223,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops playing the gameplay background music over time.
+    /// Stops playing the gameplay background music.
     /// </summary>
     private void StopGameplayBackgroundMusic()
     {
@@ -190,5 +232,29 @@ public class BackgroundMusicPlayer : MonoBehaviour
 
         // STOP PLAYING THE BACKGROUND MUSIC.
         m_gameplayBackgroundMusic.GetComponent<BackgroundMusic>().StopPlaying();
+    }
+
+    /// <summary>
+    /// Fades in the gameplay background music over time.
+    /// </summary>
+    private void FadeInGameplayBackgroundMusic()
+    {
+        // ENSURE THAT THE BACKGROUND MUSIC EXISTS.
+        CreateGamplayBackgroundMusicIfNotExists();
+
+        // FADE IN THE BACKGROUND MUSIC.
+        m_gameplayBackgroundMusic.GetComponent<BackgroundMusic>().StartFadeIn();
+    }
+
+    /// <summary>
+    /// Fades out the gameplay background music over time.
+    /// </summary>
+    private void FadeOutGameplayBackgroundMusic()
+    {
+        // ENSURE THAT THE BACKGROUND MUSIC EXISTS.
+        CreateGamplayBackgroundMusicIfNotExists();
+
+        // FADE OUT THE BACKGROUND MUSIC.
+        m_gameplayBackgroundMusic.GetComponent<BackgroundMusic>().StartFadeOut();
     }
 }

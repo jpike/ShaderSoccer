@@ -150,9 +150,13 @@ public class Ball : MonoBehaviour
         int randomSoundIndex = Random.Range(0, CollisionSounds.Length);
         AudioClip randomCollisionSound = CollisionSounds[randomSoundIndex];
 
+        // RANDOMIZE THE PITCH FOR MORE VARIETY.
+        float randomPitch = Random.Range(1.0f, 3.0f);
+
         // PLAY THE RANDOM SOUND EFFECT.
         AudioSource audioSource = GetComponent<AudioSource>();
         audioSource.clip = randomCollisionSound;
+        audioSource.pitch = randomPitch;
         audioSource.PlayOneShot(randomCollisionSound);
     }
 }
