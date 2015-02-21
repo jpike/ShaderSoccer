@@ -78,10 +78,7 @@ public class ShaderConfigurationPanel : MonoBehaviour
 
         // POPULATE THE SOLID COLOR SHADER CONFIGURATION IN THE PANEL.
         CurrentShaderConfigGui = Instantiate(SolidColorShaderConfigGuiPrefab) as GameObject;
-        CurrentShaderConfigGui.transform.SetParent(this.transform);
-        /// @todo   Research and document why these need to be set.
-        CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-        CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+        PositionShaderConfigGui(CurrentShaderConfigGui);
 
         // INITIALIZE THE SOLID COLOR SHADER CONFIGURATION GUI.
         CurrentShaderConfigGui.GetComponent<SolidColorShaderConfigGui>().Initialize(
@@ -109,10 +106,7 @@ public class ShaderConfigurationPanel : MonoBehaviour
 
         // POPULATE THE DIFFUSE SHADER CONFIGURATION IN THE PANEL.
         CurrentShaderConfigGui = Instantiate(DiffuseShaderConfigGuiPrefab) as GameObject;
-        CurrentShaderConfigGui.transform.SetParent(this.transform);
-        /// @todo   Research and document why these need to be set.
-        CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-        CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+        PositionShaderConfigGui(CurrentShaderConfigGui);
 
         // INITIALIZE THE DIFFUSE SHADER CONFIGURATION GUI.
         CurrentShaderConfigGui.GetComponent<DiffuseShaderConfigGui>().Initialize(
@@ -140,13 +134,26 @@ public class ShaderConfigurationPanel : MonoBehaviour
 
         // POPULATE THE DIFFUSE SHADER CONFIGURATION IN THE PANEL.
         CurrentShaderConfigGui = Instantiate(SpecularShaderConfigGuiPrefab) as GameObject;
-        CurrentShaderConfigGui.transform.SetParent(this.transform);
-        /// @todo   Research and document why these need to be set.
-        CurrentShaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-        CurrentShaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+        PositionShaderConfigGui(CurrentShaderConfigGui);
 
         // INITIALIZE THE SPECULAR SHADER CONFIGURATION GUI.
         CurrentShaderConfigGui.GetComponent<SpecularShaderConfigGui>().Initialize(
             ExampleGameObject);
+    }
+
+    /// <summary>
+    /// Ensures that the provided shader configuration GUI is properly positioned in the panel.
+    /// </summary>
+    /// <param name="shaderConfigGui">The shader configuration GUI to position.</param>
+    private void PositionShaderConfigGui(GameObject shaderConfigGui)
+    {
+        // MAKE SURE THE CONFIGURATION GUI IS A CHILD OF THIS PANEL.
+        shaderConfigGui.transform.SetParent(this.transform);
+
+        // APPLY SETTINGS NEEDED TO ENSURE THE CONFIGURATION GUI IS PROPERLY POSITIONED.
+        // Enforce the pivot to be at the same location as the center of the anchor points.
+        shaderConfigGui.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        // Keep the size of the rectangle as designed since the anchors define the size.
+        shaderConfigGui.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
     }
 }
