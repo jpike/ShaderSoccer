@@ -1,0 +1,7 @@
+The following people were involved directly in the creation of this game:
+
+Jacob Pike - Project Lead/Programming
+Chris DeLeon - 3D Player Models
+Lance Lockwood - Background Music/Sound Effects
+
+Special thanks to the reddit.com/r/hobbygamedev community!
